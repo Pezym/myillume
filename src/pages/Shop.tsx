@@ -7,7 +7,6 @@ import toothbrushImg from '@/assets/toothbrush.png';
 import kitFullImg from '@/assets/kit-full.jpg';
 import ReviewShowcase from '@/components/ReviewShowcase';
 import VideoTestimonials from '@/components/VideoTestimonials';
-import kitFullImg from '@/assets/kit-full.jpg';
 
 const categories = ['All', 'Kits', 'Oral Care', 'Accessories'];
 
