@@ -141,9 +141,9 @@ const Index = () => {
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 space-y-24">
           {[
-            { title: 'Brush.', desc: '360° sonic oscillation at 40,000 strokes/min. Every surface, every angle — the deepest clean without the dentist chair.', align: 'left' },
-            { title: 'Floss.', desc: 'Built-in water flosser removes 60% more plaque between teeth than brushing alone. No more excuses.', align: 'right' },
-            { title: 'Scrape.', desc: 'Eliminate the #1 source of bad breath. The integrated tongue scraper swaps on in seconds for a truly complete routine.', align: 'left' },
+            { title: 'Brush.', desc: '360° sonic oscillation at 40,000 strokes/min. Every surface, every angle — the deepest clean without the dentist chair.', align: 'left', image: lifestyleSmile },
+            { title: 'Floss.', desc: 'Built-in water flosser removes 60% more plaque between teeth than brushing alone. No more excuses.', align: 'right', image: lifestyleClose },
+            { title: 'Scrape.', desc: 'Eliminate the #1 source of bad breath. The integrated tongue scraper swaps on in seconds for a truly complete routine.', align: 'left', image: lifestyleToothpaste },
           ].map((feature, i) => (
             <div key={i} className={`grid grid-cols-1 md:grid-cols-2 gap-16 items-center`}>
               <div className={`${feature.align === 'right' ? 'md:order-2' : ''}`}>
@@ -151,7 +151,9 @@ const Index = () => {
                 <h2 className="font-display text-5xl md:text-7xl mb-5">{feature.title}</h2>
                 <p className="font-body text-base text-muted-foreground max-w-md leading-relaxed">{feature.desc}</p>
               </div>
-              <div className={`aspect-[4/3] bg-gradient-to-br from-sand-light to-sand/20 rounded-3xl ${feature.align === 'right' ? 'md:order-1' : ''}`} />
+              <div className={`aspect-[4/3] rounded-3xl overflow-hidden ${feature.align === 'right' ? 'md:order-1' : ''}`}>
+                <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
+              </div>
             </div>
           ))}
         </div>
