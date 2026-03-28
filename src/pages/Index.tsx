@@ -267,6 +267,9 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Comparison Chart */}
+      <ComparisonChart />
+
       {/* FAQ */}
       <section className="py-24">
         <div className="max-w-3xl mx-auto px-6">

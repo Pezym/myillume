@@ -185,33 +185,8 @@ const ProductDetail = () => {
               </ul>
             )}
 
-            {/* Pack Selector (Kit only) */}
-            {isKit && (
-              <div className="mb-6">
-                <p className="font-body text-xs tracking-[0.2em] uppercase mb-3">Pack</p>
-                <div className="flex gap-3">
-                  {[
-                    { id: 'full-kit', label: 'Full Oral Care Kit' },
-                    { id: 'brush-only', label: 'Brush Only' },
-                  ].map(pack => (
-                    <button
-                      key={pack.id}
-                      onClick={() => setSelectedPack(pack.id)}
-                      className={`font-body text-xs tracking-wider px-5 py-2.5 rounded-full border transition-colors ${
-                        selectedPack === pack.id
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'border-border text-muted-foreground hover:border-foreground'
-                      }`}
-                    >
-                      {pack.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Subscribe & Save (for strips, wand, toothpaste) */}
-            {hasSubscription && !hasBundles && (
+            {/* Subscribe & Save (shown for ALL products with subscription, as primary option) */}
+            {hasSubscription && (
               <div className="mb-6">
                 <p className="font-body text-xs tracking-[0.2em] uppercase mb-3">Choose Your Offer</p>
                 <div className="space-y-2">
@@ -259,26 +234,26 @@ const ProductDetail = () => {
               </div>
             )}
 
-            {/* Bundle Options (kit & toothpaste) */}
+            {/* Bundle Options (kit & toothpaste) — secondary */}
             {hasBundles && (
               <div className="mb-6">
-                <p className="font-body text-xs tracking-[0.2em] uppercase mb-3">Share the Health & Spread the Wealth</p>
+                <p className="font-body text-xs tracking-[0.2em] uppercase mb-3">Or Bundle & Save</p>
                 <div className="space-y-2">
                   {bundles.map(bundle => (
                     <button
                       key={bundle.qty}
-                      onClick={() => setSelectedBundle(bundle.qty)}
+                      onClick={() => { setSelectedBundle(bundle.qty); setPurchaseType('one-time'); }}
                       className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all ${
-                        selectedBundle === bundle.qty
+                        selectedBundle === bundle.qty && purchaseType === 'one-time'
                           ? 'border-sand bg-sand/5'
                           : 'border-border hover:border-sand/50'
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                          selectedBundle === bundle.qty ? 'border-sand' : 'border-border'
+                          selectedBundle === bundle.qty && purchaseType === 'one-time' ? 'border-sand' : 'border-border'
                         }`}>
-                          {selectedBundle === bundle.qty && <div className="w-2 h-2 rounded-full bg-sand" />}
+                          {selectedBundle === bundle.qty && purchaseType === 'one-time' && <div className="w-2 h-2 rounded-full bg-sand" />}
                         </div>
                         <div className="text-left">
                           <span className="font-body text-sm font-medium">{bundle.label}</span>
@@ -299,19 +274,6 @@ const ProductDetail = () => {
               </div>
             )}
 
-            {/* Subscribe option for toothpaste (has both bundles AND subscribe) */}
-            {hasBundles && hasSubscription && (
-              <div className="mb-6 p-4 border border-dashed border-sand/50 rounded-xl bg-sand/5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-body text-sm font-medium">Or Subscribe & Save {subscription!.savePercent}%</p>
-                    <p className="font-body text-xs text-muted-foreground">Auto-delivered monthly</p>
-                  </div>
-                  <span className="font-price text-sm font-bold">${subscription!.subscribePrice.toFixed(2)}/mo</span>
-                </div>
-              </div>
-            )}
-
             {/* CTA Buttons */}
             <div className="space-y-3 mb-4">
               <button
@@ -319,9 +281,6 @@ const ProductDetail = () => {
                 className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase py-4 rounded-full hover:bg-sand hover:text-primary transition-colors"
               >
                 <ShoppingBag size={16} /> Add to Cart — ${displayPrice.toFixed(2)}
-              </button>
-              <button className="w-full bg-sand text-primary font-body text-sm tracking-widest uppercase py-4 rounded-full hover:bg-gold transition-colors">
-                Get Your New Smile :) →
               </button>
             </div>
 
