@@ -23,7 +23,7 @@ export const products: Product[] = [
     originalPrice: 265.95,
     rating: 5,
     reviewCount: 106,
-    image: '/placeholder.svg',
+    image: toothbrushImg,
     description: 'The complete oral care system. Brush, floss, and scrape in one device. Includes 3 head attachments, wireless charger, and carrying case.',
     featured: true,
     badge: 'SAVE 63%',
