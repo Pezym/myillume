@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import VideoTestimonials from '@/components/VideoTestimonials';
 import { Star, ArrowRight, ChevronRight, Droplets, Zap } from 'lucide-react';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import toothbrushImg from '@/assets/toothbrush.png';
 import lifestyleSmile from '@/assets/lifestyle-brushing-smile.jpg';
 import lifestyleClose from '@/assets/lifestyle-brushing-close.jpg';
