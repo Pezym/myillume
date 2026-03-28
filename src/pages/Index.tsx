@@ -233,8 +233,8 @@ const Index = () => {
               {products.filter(p => p.id !== '3-in-1-oral-kit').map((product) => (
                 <CarouselItem key={product.id} className="pl-4 basis-1/2 md:basis-1/4">
                   <Link to={`/product/${product.id}`} className="group block">
-                    <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-muted mb-3">
-                      <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white mb-3">
+                      <img src={product.image} alt={product.name} className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" />
                       {product.badge && (
                         <span className="absolute top-2 left-2 bg-foreground text-background text-[10px] font-body tracking-wider uppercase px-2 py-0.5 rounded-full">{product.badge}</span>
                       )}
