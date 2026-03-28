@@ -150,8 +150,8 @@ const Index = () => {
                 <h2 className="font-display text-5xl md:text-7xl mb-5">{feature.title}</h2>
                 <p className="font-body text-base text-muted-foreground max-w-md leading-relaxed">{feature.desc}</p>
               </div>
-              <div className={`aspect-[4/3] rounded-3xl overflow-hidden ${feature.align === 'right' ? 'md:order-1' : ''}`}>
-                <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
+              <div className={`aspect-[4/3] rounded-3xl overflow-hidden ${feature.align === 'right' ? 'md:order-1' : ''} ${!feature.image ? 'bg-gradient-to-br from-sand-light to-sand/20' : ''}`}>
+                {feature.image && <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />}
               </div>
             </div>
           ))}
