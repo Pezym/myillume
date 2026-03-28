@@ -260,6 +260,39 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Desktop Product Showcase */}
+      <section className="hidden md:block py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between mb-10">
+            <h2 className="font-display text-3xl">Reinvent Your Routine</h2>
+            <Link to="/shop" className="font-body text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors">
+              Shop bestsellers <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-4 gap-6">
+            {products.slice(0, 4).map((product) => (
+              <Link key={product.id} to={`/product/${product.id}`} className="group">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-muted mb-3">
+                  <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  {product.id === '3-in-1-oral-kit' && (
+                    <span className="absolute top-3 left-3 bg-foreground text-background text-[10px] font-body tracking-wider uppercase px-2.5 py-1 rounded-full">Best seller</span>
+                  )}
+                </div>
+                <h3 className="font-body text-sm font-medium leading-tight mb-1 group-hover:text-primary transition-colors">{product.name}</h3>
+                <p className="font-body text-sm text-muted-foreground">Starting at ${product.price.toFixed(2)}</p>
+                <div className="flex items-center gap-1 mt-1">
+                  <div className="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className={`w-3 h-3 ${i < Math.floor(product.rating) ? 'fill-foreground text-foreground' : 'text-muted-foreground/30'}`} />
+                    ))}
+                  </div>
+                  <span className="text-[11px] text-muted-foreground font-body">{product.rating} ({product.reviewCount})</span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Features: Brush, Floss, Scrape */}
       <section className="py-24">
