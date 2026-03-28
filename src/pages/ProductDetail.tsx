@@ -98,11 +98,11 @@ const ProductDetail = () => {
       price: displayPrice,
       originalPrice: displayOriginalPrice,
       image: product.image,
-      variant: isKit
-        ? `${selectedBundle}x ${selectedPack === 'full-kit' ? 'Full Oral Care Kit' : 'Brush Only'}`
+      variant: purchaseType === 'subscribe'
+        ? 'Subscribe & Save'
         : hasBundles
           ? `${selectedBundle}x`
-          : purchaseType === 'subscribe' ? 'Subscribe & Save' : 'One-time purchase',
+          : 'One-time purchase',
     });
   };
 
