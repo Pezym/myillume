@@ -21,7 +21,8 @@ import toothpasteModel from '@/assets/toothpaste-model.jpg';
 import toothpasteTrio from '@/assets/toothpaste-trio.png';
 import brushHeads3Pack from '@/assets/brush-heads-3pack.jpg';
 import { products, bundlePricing, subscribePricing, productBullets, productFeatures, productFaqs } from '@/data/products';
-import { useCart } from '@/context/CartContext';
+import { useCartStore } from '@/stores/cartStore';
+import { buildCartProduct, buildBundleCartProduct, productShopifyMap } from '@/lib/cartHelpers';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import VideoTestimonials from '@/components/VideoTestimonials';
 import ReviewShowcase from '@/components/ReviewShowcase';
@@ -54,7 +55,8 @@ const useSaleCountdown = () => {
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { addItem } = useCart();
+  const addItem = useCartStore(s => s.addItem);
+  const isCartLoading = useCartStore(s => s.isLoading);
   const product = products.find(p => p.id === id) || products[0];
   const countdown = useSaleCountdown();
 
@@ -94,19 +96,37 @@ const ProductDetail = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleAddToCart = () => {
-    addItem({
-      id: `${product.id}-${hasBundles ? `bundle-${selectedBundle}` : purchaseType}`,
-      name: product.name,
-      price: displayPrice,
-      originalPrice: displayOriginalPrice,
-      image: product.image,
-      variant: purchaseType === 'subscribe'
-        ? 'Subscribe & Save'
-        : hasBundles
-          ? `${selectedBundle}x`
-          : 'One-time purchase',
-    });
+  const handleAddToCart = async () => {
+    if (hasBundles && purchaseType === 'one-time' && currentBundle) {
+      // Adding a bundle — each bundle is a separate Shopify product
+      const { product: shopifyProduct, variantId } = buildBundleCartProduct(
+        currentBundle.qty,
+        currentBundle.label,
+        currentBundle.price,
+        product.image
+      );
+      await addItem({
+        product: shopifyProduct,
+        variantId,
+        variantTitle: currentBundle.label,
+        price: { amount: currentBundle.price.toFixed(2), currencyCode: 'USD' },
+        quantity: 1,
+        selectedOptions: [],
+      });
+    } else {
+      // Single product or subscribe
+      const mapping = productShopifyMap[product.id];
+      if (!mapping) return;
+      const shopifyProduct = buildCartProduct(product);
+      await addItem({
+        product: shopifyProduct,
+        variantId: mapping.shopifyVariantGid,
+        variantTitle: purchaseType === 'subscribe' ? 'Subscribe & Save' : 'Default Title',
+        price: { amount: displayPrice.toFixed(2), currencyCode: 'USD' },
+        quantity: 1,
+        selectedOptions: [],
+      });
+    }
   };
 
   return (
@@ -282,7 +302,8 @@ const ProductDetail = () => {
             <div className="space-y-3 mb-4">
               <button
                 onClick={handleAddToCart}
-                className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase py-4 rounded-full hover:bg-sand hover:text-primary transition-colors"
+                disabled={isCartLoading}
+                className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase py-4 rounded-full hover:bg-sand hover:text-primary transition-colors disabled:opacity-50"
               >
                 <ShoppingBag size={16} /> Add to Cart — ${displayPrice.toFixed(2)}
               </button>
@@ -316,7 +337,7 @@ const ProductDetail = () => {
               <div className="border-t border-border pt-6">
                 <p className="font-body text-xs tracking-[0.2em] uppercase mb-4">What's Included</p>
                 <ul className="space-y-2">
-                  {['3-in-1 Handle', 'Brush Head Attachment', 'Water Flosser Attachment', 'Tongue Scraper Attachment', 'Wireless Charging Base', 'USB Charging Cable', 'Premium Carrying Case'].map(item => (
+                  {['Handle', 'Brush Head Attachment', 'Tongue Scraper Attachment', 'Wireless Charging Base', 'USB Charging Cable', 'Premium Carrying Case'].map(item => (
                     <li key={item} className="flex items-center gap-2 font-body text-sm text-muted-foreground">
                       <span className="w-1.5 h-1.5 bg-sand rounded-full" />
                       {item}
@@ -437,7 +458,8 @@ const ProductDetail = () => {
           </div>
           <button
             onClick={handleAddToCart}
-            className="flex items-center gap-2 bg-primary text-primary-foreground font-body text-xs tracking-widest uppercase px-6 py-3 rounded-full hover:bg-sand hover:text-primary transition-colors flex-shrink-0"
+            disabled={isCartLoading}
+            className="flex items-center gap-2 bg-primary text-primary-foreground font-body text-xs tracking-widest uppercase px-6 py-3 rounded-full hover:bg-sand hover:text-primary transition-colors flex-shrink-0 disabled:opacity-50"
           >
             <ShoppingBag size={14} /> Add to Cart
           </button>
