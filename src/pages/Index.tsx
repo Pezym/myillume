@@ -145,7 +145,7 @@ const Index = () => {
           {[
             { title: 'Brush.', desc: '360° sonic oscillation at 40,000 strokes/min. Every surface, every angle — the deepest clean without the dentist chair.', align: 'left', image: lifestyleSmile },
             { title: 'Floss.', desc: 'Built-in water flosser removes 60% more plaque between teeth than brushing alone. No more excuses.', align: 'right', image: lifestyleClose },
-            { title: 'Scrape.', desc: 'Eliminate the #1 source of bad breath. The integrated tongue scraper swaps on in seconds for a truly complete routine.', align: 'left', image: null },
+            { title: 'Scrape.', desc: 'Eliminate the #1 source of bad breath. The integrated tongue scraper swaps on in seconds for a truly complete routine.', align: 'left', image: brushHeadsImg },
           ].map((feature, i) => (
             <div key={i} className={`grid grid-cols-1 md:grid-cols-2 gap-16 items-center`}>
               <div className={`${feature.align === 'right' ? 'md:order-2' : ''}`}>
