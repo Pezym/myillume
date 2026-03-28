@@ -1,16 +1,30 @@
 
 
-# Plan: Update Footer Company Links
+# Plan: Add Refund Policy & Shipping Policy Pages
+
+## What We're Adding
+
+Two new standalone pages with the exact content from the screenshots, linked from the footer.
 
 ## Changes
 
-**File: `src/components/Footer.tsx`**
+### 1. Create `src/pages/RefundPolicy.tsx`
+- Title: "Refund policy"
+- Sections: Eligibility for Returns (bullet list), Damages and Issues, Non-Returnable Items (bullet list), Exchanges, Refunds — all text taken directly from the screenshot
+- `useEffect` to scroll to top on mount
+- Bold `info@myillume.com` as mailto links
 
-Replace the Company section's generic `.map()` loop (lines 44-56) with individual link elements:
+### 2. Create `src/pages/ShippingPolicy.tsx`
+- Title: "Shipping policy"
+- Sections: Lost/Missing Packages, Disclaimer (International), Shipping Time table (US: 4-10 business days, International: 7-14 business days)
+- `useEffect` to scroll to top on mount
 
-1. **"About illumé"** → `<Link to="/">` with an `onClick` handler that calls `window.scrollTo(0, 0)` to ensure they land at the top of the homepage.
-2. **"Become an Affiliate"** → `<a href="https://affilitrak.com/register?shop=www.myillume.com" target="_blank" rel="noopener noreferrer">`
-3. **"Contact Us"** → `<a href="mailto:info@myillume.com">`
+### 3. Update `src/App.tsx`
+- Add routes: `/refund-policy` and `/shipping-policy`
 
-Import `Link` from `react-router-dom` (already imported). No new dependencies needed.
+### 4. Update `src/components/Footer.tsx`
+- Replace the Policies `.map()` loop with individual links:
+  - "Refund Policy" → `<Link to="/refund-policy">`
+  - "Shipping Policy" → `<Link to="/shipping-policy">`
+  - "Privacy Policy" and "Terms of Service" remain as `#` links for now
 
