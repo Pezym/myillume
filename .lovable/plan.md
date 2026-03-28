@@ -1,29 +1,27 @@
 
 
-# Plan: Rounded Hero Image with Margins (Carpe Style)
-
-## What We're Doing
-
-Style the mobile hero image to match the Carpe reference: add horizontal margins/padding and rounded corners so the image appears as a contained card rather than edge-to-edge, similar to how Carpe displays their product pile photo.
+# Plan: Multiple PDP & Homepage Fixes
 
 ## Changes
 
-### File: `src/pages/Index.tsx` (line 27-29)
+### 1. Remove Subscribe & Save for the 3-in-1 Kit (`src/pages/ProductDetail.tsx`)
+- Remove the subscription option from `src/data/products.ts` by deleting the `'3-in-1-oral-kit'` entry from `subscribePricing`
+- On the PDP, the "Choose Your Offer" subscribe/one-time toggle will no longer appear for the kit since `hasSubscription` will be false
+- Default `purchaseType` to `'one-time'` when no subscription exists
 
-1. Add horizontal padding (`px-4`) to the image's parent container
-2. Apply rounded corners (`rounded-2xl`) to the image
-3. Add slight top padding (`pt-4`) so the image doesn't touch the navbar directly
+### 2. Add "Comes with 3 heads" to kit description (`src/data/products.ts`)
+- Update the kit's `description` or `productBullets` to mention "Comes with 3 brush heads"
 
-Change:
-```
-<section className="md:hidden bg-background overflow-hidden">
-  <img src={heroAmbassador} alt="Illumé ambassador" className="w-full aspect-[4/3] object-cover object-[center_25%]" />
-```
-To:
-```
-<section className="md:hidden bg-background overflow-hidden px-4 pt-3">
-  <img src={heroAmbassador} alt="Illumé ambassador" className="w-full aspect-[4/3] object-cover object-[center_25%] rounded-2xl" />
-```
+### 3. Remove 2nd image (kit-full) from kit gallery (`src/pages/ProductDetail.tsx`, line 30)
+- Change gallery from `[kitAngle1, kitFull, kitAngle2, kitAngle3, modelBrushing, kitBox]` to `[kitAngle1, kitAngle2, kitAngle3, modelBrushing, kitBox]`
 
-Single CSS-only change, no structural modifications. Desktop unchanged.
+### 4. Fix "You May Also Like" product images (`src/pages/ProductDetail.tsx`, lines 413-414)
+- Change `className="w-1/3 h-1/3 object-contain opacity-30"` to `className="w-full h-full object-contain p-6"` — removes the opacity filter and makes images fill the card
+
+### 5. Remove 3-in-1 Oral Care system box from homepage (`src/pages/Index.tsx`, lines 219-244)
+- Remove the featured kit hero card (the large `kitProduct` block) from the product showcase section, keeping only the rolling carousel of all products (including the kit in the carousel)
+
+### 6. Fix CBS video glitching (`src/pages/Index.tsx`, lines 278-285)
+- Add `preload="auto"` and an `onError` handler with retry logic to the video element
+- Wrap in a container with a fallback/loading state so the section doesn't flash empty
 
