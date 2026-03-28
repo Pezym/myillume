@@ -5,6 +5,7 @@ import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import toothbrushImg from '@/assets/toothbrush.png';
 import kitFullImg from '@/assets/kit-full.jpg';
+import drMillerImg from '@/assets/dr-miller.png';
 import ReviewShowcase from '@/components/ReviewShowcase';
 import VideoTestimonials from '@/components/VideoTestimonials';
 
@@ -135,6 +136,16 @@ const Shop = () => {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Dr. Recommended */}
+      <section className="py-10">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-center gap-4">
+          <img src={drMillerImg} alt="Dr. P Miller" className="w-12 h-12 rounded-full object-cover object-top border-2 border-sand" />
+          <p className="font-body text-xs text-muted-foreground tracking-wide">
+            <span className="font-semibold text-foreground">Dr. P Miller Recommended</span> — Trusted by dental professionals
+          </p>
         </div>
       </section>
 

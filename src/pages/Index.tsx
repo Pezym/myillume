@@ -99,7 +99,7 @@ const Index = () => {
                 <img
                   src={toothbrushImg}
                   alt="illumé 3-in-1 Toothbrush"
-                  className="w-auto h-[700px] md:h-[800px] max-h-none object-contain drop-shadow-[0_0_40px_rgba(200,184,154,0.35)]"
+                  className="w-auto h-[560px] md:h-[640px] max-h-none object-contain drop-shadow-[0_0_40px_rgba(200,184,154,0.35)]"
                 />
               </div>
 
