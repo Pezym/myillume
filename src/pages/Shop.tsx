@@ -71,7 +71,7 @@ const Shop = () => {
               }`}
             >
               <Link to={`/product/${product.id}`}>
-              <div className={`relative bg-sand-light ${product.featured && i === 0 ? 'aspect-[4/3]' : 'aspect-square'} flex items-center justify-center p-8`}>
+              <div className={`relative bg-sand-light ${product.featured && i === 0 ? 'aspect-[4/3]' : 'aspect-[4/5]'} flex items-center justify-center overflow-hidden`}>
                   <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
                   {product.badge && (
                     <span className="absolute top-4 right-4 bg-sand text-primary font-body text-[10px] tracking-widest uppercase px-3 py-1 rounded-full">
