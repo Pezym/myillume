@@ -337,7 +337,7 @@ const ProductDetail = () => {
               <div className="border-t border-border pt-6">
                 <p className="font-body text-xs tracking-[0.2em] uppercase mb-4">What's Included</p>
                 <ul className="space-y-2">
-                  {['3-in-1 Handle', 'Brush Head Attachment', 'Water Flosser Attachment', 'Tongue Scraper Attachment', 'Wireless Charging Base', 'USB Charging Cable', 'Premium Carrying Case'].map(item => (
+                  {['Handle', 'Brush Head Attachment', 'Tongue Scraper Attachment', 'Wireless Charging Base', 'USB Charging Cable', 'Premium Carrying Case'].map(item => (
                     <li key={item} className="flex items-center gap-2 font-body text-sm text-muted-foreground">
                       <span className="w-1.5 h-1.5 bg-sand rounded-full" />
                       {item}
