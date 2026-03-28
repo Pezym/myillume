@@ -39,69 +39,69 @@ const Shop = () => {
       </section>
 
       {/* Filter Bar */}
-      <section id="products" className="max-w-7xl mx-auto px-6 pt-12 pb-4">
-        <div className="flex items-center justify-between flex-wrap gap-4">
-          <div className="flex gap-2">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                className={`font-body text-xs tracking-widest uppercase px-5 py-2 rounded-full border transition-colors ${
-                  activeFilter === cat
-                    ? 'bg-primary text-primary-foreground border-primary'
-                    : 'border-border text-muted-foreground hover:border-foreground hover:text-foreground'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+      <section id="products" className="max-w-7xl mx-auto px-6 pt-14 pb-6">
+        <div className="flex items-center justify-between flex-wrap gap-4 mb-2">
+          <h2 className="font-display text-2xl">Our Products</h2>
+          <div className="flex items-center gap-6">
+            <div className="flex gap-2">
+              {categories.map(cat => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveFilter(cat)}
+                  className={`font-body text-[11px] tracking-widest uppercase px-5 py-2 rounded-full transition-colors ${
+                    activeFilter === cat
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+            <p className="font-body text-xs text-muted-foreground hidden sm:block">{filtered.length} products</p>
           </div>
-          <p className="font-body text-xs text-muted-foreground">{filtered.length} products</p>
         </div>
+        <div className="w-full h-px bg-border" />
       </section>
 
       {/* Product Grid */}
-      <section className="max-w-7xl mx-auto px-6 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {filtered.map((product, i) => (
-            <div
-              key={product.id}
-              className={`group bg-background border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-all duration-300 ${
-                product.featured && i === 0 ? 'md:col-span-2 md:row-span-2' : ''
-              }`}
-            >
+      <section className="max-w-7xl mx-auto px-6 pb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10">
+          {filtered.map((product) => (
+            <div key={product.id} className="group">
               <Link to={`/product/${product.id}`}>
-              <div className={`relative bg-sand-light ${product.featured && i === 0 ? 'aspect-[4/3]' : 'aspect-[4/5]'} flex items-center justify-center overflow-hidden`}>
-                  <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-sand-light/30 mb-4">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                   {product.badge && (
-                    <span className="absolute top-4 right-4 bg-sand text-primary font-body text-[10px] tracking-widest uppercase px-3 py-1 rounded-full">
+                    <span className="absolute top-3 left-3 bg-primary text-primary-foreground font-body text-[9px] tracking-widest uppercase px-3 py-1 rounded-full">
                       {product.badge}
                     </span>
                   )}
-                  <span className="absolute top-4 left-4 font-body text-[10px] tracking-widest uppercase text-muted-foreground bg-background/80 px-2 py-1 rounded">
-                    {product.category}
-                  </span>
                 </div>
               </Link>
-              <div className="p-5">
+              <div className="space-y-1.5">
                 <Link to={`/product/${product.id}`}>
-                  <h3 className="font-display text-base mb-1 group-hover:text-sand transition-colors">{product.name}</h3>
+                  <h3 className="font-display text-sm group-hover:text-sand transition-colors">{product.name}</h3>
                 </Link>
-                <div className="flex items-center gap-1 mb-2">
+                <div className="flex items-center gap-1">
                   {Array.from({ length: 5 }).map((_, j) => (
-                    <Star key={j} size={11} className={j < Math.floor(product.rating) ? 'fill-gold text-gold' : 'text-border'} />
+                    <Star key={j} size={10} className={j < Math.floor(product.rating) ? 'fill-gold text-gold' : 'text-border'} />
                   ))}
                   <span className="font-body text-[10px] text-muted-foreground ml-1">({product.reviewCount})</span>
                 </div>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="font-price text-lg font-semibold">${product.price}</span>
-                  <span className="font-price text-sm text-muted-foreground line-through">${product.originalPrice}</span>
+                <div className="flex items-center gap-2">
+                  <span className="font-price text-base font-semibold">${product.price}</span>
+                  <span className="font-price text-xs text-muted-foreground line-through">${product.originalPrice}</span>
                 </div>
                 <button
                   onClick={() => addItem({ id: product.id, name: product.name, price: product.price, originalPrice: product.originalPrice, image: product.image })}
-                  className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-body text-xs tracking-widest uppercase py-3 rounded-full hover:bg-sand hover:text-primary transition-colors"
+                  className="mt-2 w-full flex items-center justify-center gap-2 border border-foreground text-foreground font-body text-[10px] tracking-widest uppercase py-2.5 rounded-full hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
                 >
-                  <ShoppingBag size={14} /> Add to Cart
+                  <ShoppingBag size={12} /> Add to Cart
                 </button>
               </div>
             </div>
@@ -146,28 +146,6 @@ const Shop = () => {
                 >
                   Add to Cart
                 </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Routine Steps */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="font-display text-3xl md:text-4xl text-center mb-3">The illumé Routine</h2>
-          <p className="font-body text-sm text-muted-foreground text-center mb-12">4 simple steps to your healthiest smile.</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { step: '01', name: 'Brush', desc: '360° sonic cleaning with the 3-in-1 brush head.' },
-              { step: '02', name: 'Floss', desc: 'Water floss between every tooth effortlessly.' },
-              { step: '03', name: 'Scrape', desc: 'Remove tongue bacteria for fresh breath.' },
-              { step: '04', name: 'Whiten', desc: 'Apply whitening strips for a luminous smile.' },
-            ].map(s => (
-              <div key={s.step} className="bg-sand-light/50 border border-border rounded-2xl p-6">
-                <span className="font-price text-xs tracking-widest text-sand">STEP {s.step}</span>
-                <h3 className="font-display text-xl mt-2 mb-2">{s.name}</h3>
-                <p className="font-body text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
               </div>
             ))}
           </div>
