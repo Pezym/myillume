@@ -1,5 +1,7 @@
 import toothbrushImg from '@/assets/toothbrush.png';
 import toothpasteImg from '@/assets/lifestyle-toothpaste.jpg';
+import kitFullImg from '@/assets/kit-full.jpg';
+import brushHeads3PackImg from '@/assets/brush-heads-3pack.jpg';
 
 export interface Product {
   id: string;
@@ -24,7 +26,7 @@ export const products: Product[] = [
     originalPrice: 265.95,
     rating: 5,
     reviewCount: 106,
-    image: toothbrushImg,
+    image: kitFullImg,
     description: 'The complete oral care system. Brush, floss, and scrape in one device. Includes 3 head attachments, wireless charger, and carrying case.',
     featured: true,
     badge: 'SAVE 63%',
