@@ -45,7 +45,7 @@ export const products: Product[] = [
     rating: 5,
     reviewCount: 106,
     image: toothbrushImg,
-    description: 'The complete oral care system. Brush, floss, and scrape in one device. Includes 3 head attachments, wireless charger, and carrying case.',
+    description: 'The complete oral care system. Brush and scrape in one device. Includes head attachments, wireless charger, and carrying case.',
     featured: true,
     badge: 'SAVE 63%',
   },
@@ -124,13 +124,11 @@ export const subscribePricing: Record<string, SubscribeOption> = {
 export const productBullets: Record<string, string[]> = {
   '3-in-1-oral-kit': [
     '360° rotation for a Professional Clean',
-    'Deep Flossing action for Healthier gums',
     'Built-in tongue scraper for Instantly Fresh Breath that lasts.',
     'Comes with 3 DuPont bristle brush heads',
   ],
   'purple-toothpaste': [
     '360° rotation for a Professional Clean',
-    'Deep Flossing action for Healthier gums',
     'Built-in tongue scraper for Instantly Fresh Breath that lasts.',
   ],
   'whitening-strips': [
@@ -153,7 +151,6 @@ export const productBullets: Record<string, string[]> = {
 export const productFeatures: Record<string, { icon: string; title: string; desc: string }[]> = {
   '3-in-1-oral-kit': [
     { icon: '🦷', title: '360° Bidirectional Brush Head', desc: 'Sonic oscillation at 40,000 strokes/min. Cleans surfaces standard brushes miss.' },
-    { icon: '💧', title: 'Water Flosser Attachment', desc: 'Removes 60% more plaque between teeth. Gentle, adjustable pressure for sensitive gums.' },
     { icon: '👅', title: 'Tongue Scraper Attachment', desc: 'Eliminates bad breath at the source. Swaps in seconds with the patented head system.' },
     { icon: '⚡', title: '60-Day Wireless Charging Base', desc: 'Industry-leading battery life. USB cable and wireless charging base included.' },
   ],
@@ -177,8 +174,8 @@ export const productFeatures: Record<string, { icon: string; title: string; desc
 export const productFaqs: Record<string, { q: string; a: string }[]> = {
   '3-in-1-oral-kit': [
     { q: 'How long does the battery last?', a: 'The illumé toothbrush lasts up to 60 days on a single charge with the wireless charging base included.' },
-    { q: 'Is it safe for sensitive gums?', a: 'Yes! The water flosser has adjustable pressure settings specifically designed for sensitive gums.' },
-    { q: "What's included in the Full Oral Care Kit?", a: 'The kit includes the 3-in-1 handle, brush head, water flosser attachment, tongue scraper, wireless charging base, USB cable, and premium carrying case.' },
+    { q: 'Is it safe for sensitive gums?', a: 'Yes! illumé features multiple brushing modes, including a gentle mode designed specifically for sensitive teeth and gums.' },
+    { q: "What's included in the Full Oral Care Kit?", a: 'The kit includes the handle, brush head, tongue scraper, wireless charging base, USB cable, and premium carrying case.' },
     { q: 'How often should I replace the brush heads?', a: 'We recommend replacing brush heads every 3 months for optimal cleaning performance.' },
     { q: 'Do you offer a warranty?', a: 'Yes — every illumé product comes with a 60-day smile guarantee and a 1-year manufacturer warranty.' },
   ],

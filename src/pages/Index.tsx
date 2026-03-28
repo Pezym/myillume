@@ -172,11 +172,6 @@ const Index = () => {
                 <span className="font-body text-xs text-muted-foreground">360° sonic</span>
               </div>
 
-              <div className="absolute top-1/2 -left-8 md:-left-16 -translate-y-1/2 bg-background border border-border rounded-full px-4 py-2 flex items-center gap-2 shadow-sm">
-                <Droplets size={16} className="text-blue-400" />
-                <span className="font-body text-sm font-medium">Floss</span>
-                <span className="font-body text-xs text-muted-foreground">Water flosser</span>
-              </div>
 
               <div className="absolute bottom-[28%] -right-8 md:-right-12 bg-background border border-border rounded-full px-4 py-2 flex items-center gap-2 shadow-sm">
                 <span className="text-base">👅</span>
@@ -289,13 +284,12 @@ const Index = () => {
 
 
 
-      {/* Features: Brush, Floss, Scrape */}
+      {/* Features: Brush, Scrape */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6 space-y-24">
           {[
             { title: 'Brush.', desc: '360° sonic oscillation at 40,000 strokes/min. Every surface, every angle — the deepest clean without the dentist chair.', align: 'left', image: lifestyleSmile },
-            { title: 'Floss.', desc: 'Built-in water flosser removes 60% more plaque between teeth than brushing alone. No more excuses.', align: 'right', image: lifestyleClose },
-            { title: 'Scrape.', desc: 'Eliminate the #1 source of bad breath. The integrated tongue scraper swaps on in seconds for a truly complete routine.', align: 'left', image: brushHeadsImg },
+            { title: 'Scrape.', desc: 'Eliminate the #1 source of bad breath. The integrated tongue scraper swaps on in seconds for a truly complete routine.', align: 'right', image: brushHeadsImg },
           ].map((feature, i) => (
             <div key={i} className={`grid grid-cols-1 md:grid-cols-2 gap-16 items-center`}>
               <div className={`${feature.align === 'right' ? 'md:order-2' : ''}`}>
@@ -322,8 +316,6 @@ const Index = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
             {[
               { pct: '96%', text: 'of Americans will develop a cavity at some point in their life due to improper', bold: 'brushing habits.' },
-              { pct: '60%', text: 'more plaque is removed when you', bold: 'floss alongside brushing.' },
-              { pct: '55%', text: 'of Americans admit they', bold: 'don\'t floss daily.' },
               { pct: '53%', text: 'of bad breath cases originate from bacteria on the', bold: 'tongue.' },
             ].map((stat, i) => (
               <div key={i} className="flex items-start gap-5">
@@ -415,13 +407,13 @@ const Index = () => {
             <AccordionItem value="q2" className="border border-border rounded-2xl px-6">
               <AccordionTrigger className="font-body text-sm">🦷 Is it good for sensitive gums?</AccordionTrigger>
               <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
-                Yes! illumé features multiple brushing modes, including a gentle mode designed specifically for sensitive teeth and gums. The water flosser is also adjustable so you can control the pressure.
+                Yes! illumé features multiple brushing modes, including a gentle mode designed specifically for sensitive teeth and gums.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="q3" className="border border-border rounded-2xl px-6">
               <AccordionTrigger className="font-body text-sm">🦷 Is this really better than a regular electric toothbrush?</AccordionTrigger>
               <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
-                A regular electric toothbrush only brushes. illumé brushes, flosses, AND scrapes your tongue — all in one device. It's a complete oral care system that replaces three separate tools.
+                A regular electric toothbrush only brushes. illumé brushes AND scrapes your tongue — all in one device. It's a complete oral care system that replaces two separate tools.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="q4" className="border border-border rounded-2xl px-6">

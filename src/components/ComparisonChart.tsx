@@ -1,7 +1,7 @@
 import { Check, X } from 'lucide-react';
 
 const rows = [
-  { feature: '3-in-1 Cleaning', illume: true, oralB: false, phillips: false },
+  { feature: '2-in-1 Cleaning', illume: true, oralB: false, phillips: false },
   { feature: 'Plaque Removal', illume: true, oralB: true, phillips: true },
   { feature: 'Gum Sensitivity', illume: true, oralB: false, phillips: true },
   { feature: '60 Day Battery Life', illume: true, oralB: false, phillips: false },
