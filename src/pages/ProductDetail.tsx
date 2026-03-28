@@ -97,7 +97,7 @@ const ProductDetail = () => {
           {/* Left: Gallery */}
           <div className="lg:col-span-7">
             <div className="aspect-square bg-sand-light rounded-2xl overflow-hidden mb-4">
-              <img src={galleryImages[selectedImage]} alt={product.name} className="w-full h-full object-cover" />
+              <img src={galleryImages[selectedImage]} alt={product.name} className="w-full h-full object-contain" />
             </div>
             <div className="grid grid-cols-4 gap-3">
               {galleryImages.map((img, i) => (
