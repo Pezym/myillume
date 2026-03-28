@@ -42,7 +42,7 @@ const ProductDetail = () => {
 
   const galleryImages = productGalleries[product.id] || [product.image];
 
-  useEffect(() => { setSelectedImage(0); }, [product.id]);
+  useEffect(() => { setSelectedImage(0); window.scrollTo(0, 0); }, [product.id]);
 
   const currentBundle = bundlePricing.find(b => b.qty === selectedBundle) || bundlePricing[0];
 

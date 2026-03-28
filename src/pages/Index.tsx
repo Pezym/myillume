@@ -51,7 +51,7 @@ const Index = () => {
                 <p className="font-display text-2xl md:text-3xl flex items-baseline gap-1">
                   4.8<Star size={18} className="fill-gold text-gold inline -mt-1" />
                 </p>
-                <p className="font-body text-[10px] tracking-[0.15em] uppercase text-muted-foreground mt-0.5">106 Reviews</p>
+                <p className="font-body text-[10px] tracking-[0.15em] uppercase text-muted-foreground mt-0.5">75k+ Reviews</p>
               </div>
               <div className="w-px h-10 bg-border" />
               <div>
