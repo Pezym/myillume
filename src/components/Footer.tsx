@@ -9,7 +9,7 @@ const Footer = () => {
           <div>
             <h3 className="font-display italic text-2xl mb-3">illumé<span className="text-sand">.</span></h3>
             <p className="font-body text-sm text-primary-foreground/60 leading-relaxed">
-              The world's first 3-in-1 electric toothbrush. Brush, floss, and scrape your way to a brighter, healthier smile.
+              The world's first 2-in-1 electric toothbrush. Brush and scrape your way to a brighter, healthier smile.
             </p>
           </div>
 
