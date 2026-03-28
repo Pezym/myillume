@@ -220,7 +220,7 @@ const Index = () => {
                   </div>
                   <div className="flex flex-col justify-center p-6 md:p-10 md:w-1/2">
                     <h3 className="font-display text-xl md:text-2xl font-medium mb-2">{kitProduct.name}</h3>
-                    <p className="font-body text-sm text-muted-foreground mb-3">{kitProduct.subtitle}</p>
+                    <p className="font-body text-sm text-muted-foreground mb-3">{kitProduct.description}</p>
                     <p className="font-body text-lg font-medium mb-2">Starting at ${kitProduct.price.toFixed(2)}</p>
                     <div className="flex items-center gap-1">
                       <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className={`w-3.5 h-3.5 ${i < Math.floor(kitProduct.rating) ? 'fill-foreground text-foreground' : 'text-muted-foreground/30'}`} />)}</div>
