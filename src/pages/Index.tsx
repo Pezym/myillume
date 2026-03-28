@@ -95,11 +95,11 @@ const Index = () => {
               })}
 
               {/* Product image — no background */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden rounded-full w-full h-full">
                 <img
                   src={toothbrushImg}
                   alt="illumé 3-in-1 Toothbrush"
-                  className="w-auto h-[380px] md:h-[440px] object-contain drop-shadow-[0_0_40px_rgba(200,184,154,0.35)]"
+                  className="w-auto h-[700px] md:h-[800px] max-h-none object-contain drop-shadow-[0_0_40px_rgba(200,184,154,0.35)]"
                 />
               </div>
 
