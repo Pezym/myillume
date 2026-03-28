@@ -24,11 +24,14 @@ const Index = () => {
     <div>
       {/* Hero */}
       {/* Mobile: stacked layout — image on top, text below */}
-      <section className="md:hidden bg-background">
-        <div className="w-full aspect-[4/3] overflow-hidden">
-          <img src={heroAmbassador} alt="Illumé ambassador" className="w-full h-full object-cover object-top" />
-        </div>
-        <div className="px-6 py-10">
+      <section className="md:hidden relative min-h-[85vh] bg-background overflow-hidden">
+        {/* Full-bleed background image */}
+        <img src={heroAmbassador} alt="Illumé ambassador" className="absolute inset-0 w-full h-full object-cover object-top" />
+        {/* Vertical gradient fade — transparent at top, solid at bottom */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent" />
+
+        {/* Text content overlaid at bottom */}
+        <div className="relative z-10 flex flex-col justify-end h-full min-h-[85vh] px-6 pb-10 pt-20">
           <div className="max-w-xl">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 border border-foreground/20 rounded-full px-4 py-1.5 mb-8">
