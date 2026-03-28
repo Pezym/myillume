@@ -1,28 +1,28 @@
 
 
-# Plan: Video Testimonial Carousel
+# Plan: Add "Facts Backed by Science" & FAQ Sections
 
-## What We're Doing
+## What We're Adding
 
-1. **Convert VideoTestimonials from a static grid to a swipeable carousel** using Embla Carousel (already installed via the carousel UI component). Show 4 videos at a time on desktop, 2 on mobile, with left/right navigation arrows.
+Two new sections from the screenshots, placed logically on the homepage:
 
-2. **Add 3 new video testimonials** (the 3 uploaded .mov files) to the testimonials array, bringing the total to 7 videos that cycle through the carousel.
+1. **"Facts Backed by Science" section** — placed after the Brush/Floss/Scrape features (line 163) and before Category Cards. Two-column layout: left side has the heading + 4 stat items (96%, 60%, 55%, 53%) with circular percentage indicators, right side has a product lifestyle image (reuse `toothpasteBottle` asset). Top heading: "Modern Toothbrushes Leave your Dental Health Deficient" with subtitle "illumé is the Only Toothbrush That Fills in the Gaps!"
 
-3. **Add the VideoTestimonials component to the homepage** — place it inside the "What Our Customers Say" section (lines 211-241 of Index.tsx), right after the text review cards.
+2. **FAQ accordion section** — placed after the Testimonials section (line 245) and before the Newsletter. Uses the existing shadcn Accordion component. Heading: "Wait… I was wondering that too." with subheading "YOUR ILLUMÉ QUESTIONS, ANSWERED." Contains 7 questions with their answers from the screenshot.
 
 ## Technical Details
 
-### New Assets
-- Copy 3 uploaded `.mov` files → `public/videos/testimonial-5.mov`, `testimonial-6.mov`, `testimonial-7.mov`
-
-### File: `src/components/VideoTestimonials.tsx`
-- Import Embla Carousel hooks (`useEmblaCarousel`) and add left/right arrow buttons
-- Replace the `grid` layout with an Embla carousel container
-- Update the testimonials array to include 7 videos total
-- Show 4 slides on desktop (basis-1/4), 2 on mobile (basis-1/2)
-- Add subtle prev/next arrow buttons on either side
-
 ### File: `src/pages/Index.tsx`
-- Import `VideoTestimonials`
-- Add `<VideoTestimonials />` after the text review cards grid inside the "What Our Customers Say" section (after line 239)
+- Import `Accordion, AccordionItem, AccordionTrigger, AccordionContent` from `@/components/ui/accordion`
+- **After line 163** (after features section closing `</section>`): Add "Facts Backed by Science" section with a 2-column grid. Left column has 4 stat rows, each with a blue circular ring indicator (styled via CSS border + rounded-full) showing the percentage, plus descriptive text with bold keywords. Right column shows the toothpaste lifestyle image.
+- **After line 245** (after testimonials section closing `</section>`): Add FAQ section with accordion containing these 7 Q&As:
+  - Will it help with bad breath?
+  - Is it good for sensitive gums?
+  - Is this really better than a regular electric toothbrush?
+  - I hate flossing… will I actually use this?
+  - How often should I use the flosser and tongue scraper?
+  - How long does the battery last?
+  - Is it bulky or hard to travel with?
+
+Each question prefixed with a small tooth emoji (🦷) to match the screenshot style. All answers taken directly from the screenshot text.
 
