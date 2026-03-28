@@ -3,6 +3,7 @@ import VideoTestimonials from '@/components/VideoTestimonials';
 import ReviewShowcase from '@/components/ReviewShowcase';
 import ComparisonChart from '@/components/ComparisonChart';
 import { Star, ArrowRight, ChevronRight, Droplets, Zap } from 'lucide-react';
+import { products } from '@/data/products';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import toothbrushImg from '@/assets/toothbrush.png';
 import lifestyleSmile from '@/assets/lifestyle-brushing-smile.jpg';
@@ -75,13 +76,12 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Right — Product showcase */}
-          <div className="relative flex items-center justify-center lg:justify-end">
+          {/* Right — Product showcase (desktop only) */}
+          <div className="relative hidden md:flex items-center justify-center lg:justify-end">
             {/* Large subtle circle */}
             <div className="relative w-[420px] h-[420px] md:w-[520px] md:h-[520px]">
               <div className="absolute inset-0 rounded-full border border-sand/30" />
               <div className="absolute inset-4 rounded-full border border-sand/15" />
-              {/* Dot pattern */}
               {[...Array(8)].map((_, i) => {
                 const angle = (i / 8) * 360;
                 const rad = (angle * Math.PI) / 180;
@@ -98,7 +98,6 @@ const Index = () => {
                 );
               })}
 
-              {/* Product image — no background */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden rounded-full w-full h-full">
                 <img
                   src={toothbrushImg}
@@ -107,7 +106,6 @@ const Index = () => {
                 />
               </div>
 
-              {/* Floating badges */}
               <div className="absolute top-8 right-0 md:-right-4 bg-background border border-border rounded-full px-4 py-2 flex items-center gap-2 shadow-sm">
                 <span className="text-base">🪥</span>
                 <span className="font-body text-sm font-medium">Brush</span>
@@ -133,6 +131,25 @@ const Index = () => {
               </div>
             </div>
           </div>
+
+          {/* Mobile — Auto-scrolling product carousel */}
+          <div className="md:hidden overflow-hidden mt-6">
+            <div className="animate-marquee flex gap-4 w-max">
+              {[...products, ...products].map((product, i) => (
+                <Link
+                  key={`${product.id}-${i}`}
+                  to={`/product/${product.id}`}
+                  className="flex-shrink-0 w-36 bg-background border border-border rounded-xl p-3 hover:shadow-md transition-shadow"
+                >
+                  <div className="aspect-square rounded-lg overflow-hidden bg-sand-light mb-2">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                  </div>
+                  <p className="font-body text-xs font-medium leading-tight truncate">{product.name}</p>
+                  <p className="font-body text-xs text-muted-foreground mt-1">${product.price.toFixed(2)}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -156,6 +173,21 @@ const Index = () => {
                 <span key={name} className="font-display text-lg italic text-muted-foreground/40 tracking-wide">{name}</span>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mobile — Toothbrush circle below As Seen On */}
+      <section className="md:hidden py-12 flex justify-center">
+        <div className="relative w-[320px] h-[320px]">
+          <div className="absolute inset-0 rounded-full border border-sand/30" />
+          <div className="absolute inset-3 rounded-full border border-sand/15" />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden rounded-full w-full h-full">
+            <img
+              src={toothbrushImg}
+              alt="illumé 3-in-1 Toothbrush"
+              className="w-auto h-[420px] max-h-none object-contain drop-shadow-[0_0_40px_rgba(200,184,154,0.35)]"
+            />
           </div>
         </div>
       </section>
