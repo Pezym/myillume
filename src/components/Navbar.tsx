@@ -74,16 +74,17 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-background border-b border-border px-6 pb-6 space-y-4">
-          {links.map(link => (
-            <Link
-              key={link.label}
-              to={link.to}
-              onClick={() => setMobileOpen(false)}
-              className="block font-body text-sm tracking-wide text-foreground py-2"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map(link =>
+            link.external ? (
+              <a key={link.label} href={link.to} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="block font-body text-sm tracking-wide text-foreground py-2">
+                {link.label}
+              </a>
+            ) : (
+              <Link key={link.label} to={link.to} onClick={() => setMobileOpen(false)} className="block font-body text-sm tracking-wide text-foreground py-2">
+                {link.label}
+              </Link>
+            )
+          )}
           <Link
             to="/shop"
             onClick={() => setMobileOpen(false)}
