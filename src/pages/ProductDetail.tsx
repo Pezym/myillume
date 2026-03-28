@@ -302,7 +302,8 @@ const ProductDetail = () => {
             <div className="space-y-3 mb-4">
               <button
                 onClick={handleAddToCart}
-                className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase py-4 rounded-full hover:bg-sand hover:text-primary transition-colors"
+                disabled={isCartLoading}
+                className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase py-4 rounded-full hover:bg-sand hover:text-primary transition-colors disabled:opacity-50"
               >
                 <ShoppingBag size={16} /> Add to Cart — ${displayPrice.toFixed(2)}
               </button>
@@ -457,7 +458,8 @@ const ProductDetail = () => {
           </div>
           <button
             onClick={handleAddToCart}
-            className="flex items-center gap-2 bg-primary text-primary-foreground font-body text-xs tracking-widest uppercase px-6 py-3 rounded-full hover:bg-sand hover:text-primary transition-colors flex-shrink-0"
+            disabled={isCartLoading}
+            className="flex items-center gap-2 bg-primary text-primary-foreground font-body text-xs tracking-widest uppercase px-6 py-3 rounded-full hover:bg-sand hover:text-primary transition-colors flex-shrink-0 disabled:opacity-50"
           >
             <ShoppingBag size={14} /> Add to Cart
           </button>
