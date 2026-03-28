@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import VideoTestimonials from '@/components/VideoTestimonials';
 import ReviewShowcase from '@/components/ReviewShowcase';
 import ComparisonChart from '@/components/ComparisonChart';
+import ProductQuiz from '@/components/ProductQuiz';
 import { Star, ArrowRight, ChevronRight, Droplets, Zap } from 'lucide-react';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
