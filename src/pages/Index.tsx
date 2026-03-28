@@ -205,10 +205,37 @@ const Index = () => {
             </Link>
           </div>
 
-          {/* Rolling carousel of all products */}
+          {/* Pinned 3-in-1 Kit Card */}
+          {(() => {
+            const kitProduct = products.find(p => p.id === '3-in-1-oral-kit');
+            if (!kitProduct) return null;
+            return (
+              <Link to={`/product/${kitProduct.id}`} className="group block mb-8">
+                <div className="flex flex-col md:flex-row gap-6 rounded-2xl overflow-hidden bg-muted">
+                  <div className="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto overflow-hidden">
+                    <img src={kitProduct.image} alt={kitProduct.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    {kitProduct.badge && (
+                      <span className="absolute top-3 left-3 bg-foreground text-background text-[10px] font-body tracking-wider uppercase px-2.5 py-1 rounded-full">{kitProduct.badge}</span>
+                    )}
+                  </div>
+                  <div className="flex flex-col justify-center p-6 md:p-10 md:w-1/2">
+                    <h3 className="font-display text-xl md:text-2xl font-medium mb-2">{kitProduct.name}</h3>
+                    <p className="font-body text-sm text-muted-foreground mb-3">{kitProduct.description}</p>
+                    <p className="font-body text-lg font-medium mb-2">Starting at ${kitProduct.price.toFixed(2)}</p>
+                    <div className="flex items-center gap-1">
+                      <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className={`w-3.5 h-3.5 ${i < Math.floor(kitProduct.rating) ? 'fill-foreground text-foreground' : 'text-muted-foreground/30'}`} />)}</div>
+                      <span className="text-xs text-muted-foreground font-body">{kitProduct.rating} ({kitProduct.reviewCount})</span>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            );
+          })()}
+
+          {/* Carousel of remaining products */}
           <Carousel opts={{ align: 'start', loop: true }} plugins={[Autoplay({ delay: 3000, stopOnInteraction: false })]} className="w-full">
             <CarouselContent className="-ml-4">
-              {products.map((product) => (
+              {products.filter(p => p.id !== '3-in-1-oral-kit').map((product) => (
                 <CarouselItem key={product.id} className="pl-4 basis-1/2 md:basis-1/4">
                   <Link to={`/product/${product.id}`} className="group block">
                     <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-muted mb-3">
