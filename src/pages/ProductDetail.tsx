@@ -379,29 +379,7 @@ const ProductDetail = () => {
           <p className="font-display text-4xl mb-1">4.9</p>
           <p className="font-body text-sm text-muted-foreground">{product.reviewCount} verified reviews</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { name: 'Sarah M.', quote: "I've never had my teeth feel this clean after brushing at home. The water flosser attachment is genius.", rating: 5 },
-            { name: 'James K.', quote: 'Replaced three separate devices with one. The build quality is outstanding. Worth every penny.', rating: 5 },
-            { name: 'Emily R.', quote: 'My dentist noticed the difference at my last cleaning. The tongue scraper alone is worth it.', rating: 5 },
-          ].map((review, i) => (
-            <div key={i} className="bg-sand-light/50 border border-border rounded-2xl p-6">
-              <div className="flex gap-0.5 mb-3">
-                {Array.from({ length: review.rating }).map((_, j) => (
-                  <Star key={j} size={12} className="fill-gold text-gold" />
-                ))}
-              </div>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">"{review.quote}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sand to-gold" />
-                <div>
-                  <p className="font-body text-sm font-medium">{review.name}</p>
-                  <p className="font-body text-[10px] text-muted-foreground">Verified Buyer</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ReviewShowcase />
       </section>
 
       {/* FAQ */}
