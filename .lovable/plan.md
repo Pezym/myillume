@@ -1,51 +1,67 @@
 
 
-# Plan: Per-Product Pricing, Descriptions & Features
-
-## Problem
-The Product Detail Page currently hardcodes everything — bundle pricing, features, "What's Included", FAQs, and pack selector — using the 3-in-1 oral kit's data for ALL products.
+# Plan: Multiple Homepage & Product Page Enhancements
 
 ## Changes
 
-### 1. Update `src/data/products.ts`
-- Update product prices/names to match screenshots:
-  - **Toothpaste**: name "Illumé Purple Color Correcting Toothpaste", price $24.95, originalPrice $49.95, SAVE 50%
-  - **Whitening Strips**: name "Illumé Purple Advanced Whitening Strips", price $39.00, originalPrice (not shown, use current)
-  - **Whitening Wand**: name "Illumé Extra Strength Whitening Wand", price $37.12, originalPrice (not shown, use current)
-- Add per-product bundle pricing as a new exported map (keyed by product id):
-  - **3-in-1 kit**: current bundle pricing (Buy 1 $97, His & Hers $194, 3 Pack $291, Buy 4 $388)
-  - **Toothpaste**: Buy 1 $24.95/$49.95, His & Her's $49.90/$99.90, 3 Pack Family $74.85/$149.85, Buy 4 $99.80/$199.80
-  - **Strips & Wand**: no bundles (subscribe & save model only)
-  - **Brush Heads**: no bundles
+### 1. Add CBS Video to "As Seen On" Section
+**File: `src/pages/Index.tsx` (lines 132-142)**
+- Copy the uploaded `.mov` file to `src/assets/cbs-feature.mov`
+- Replace the text-only "As Seen On" section with a layout that includes a playable video alongside the brand logos
+- Video auto-plays muted in a rounded container, with click-to-unmute
 
-### 2. Refactor `src/pages/ProductDetail.tsx`
-- **Per-product descriptions**: Add a `productDetails` map with product-specific bullet descriptions:
-  - **Kit**: "360 rotation for a Professional Clean", "Deep Flossing action for Healthier gums", "Built-in tongue scraper for Instantly Fresh Breath that lasts."
-  - **Toothpaste**: same 3 bullet points (matches screenshot)
-  - **Strips**: "Whiter Teeth in Minutes", "Gentle on Enamel, Tough on Stains", "Fits in Your Pocket, Take it On-the-Go"
-  - **Wand**: same as strips
-  - **Brush Heads**: simple description
+### 2. Change Hero Headline
+**File: `src/pages/Index.tsx` (line 27)**
+- Change "A smarter smile starts with illumé." to "Reinvent the Way you Brush with Illumé"
 
-- **Conditional Subscribe & Save**: For strips and wand, show a "Choose Your Offer" section with Subscribe & Save (25% off) and One-time purchase options instead of bundle pricing. Subscription prices from screenshots:
-  - Strips: $29.25/month subscribe, $39.00 one-time
-  - Wand: $27.84/month subscribe, $37.12 one-time
-  - Toothpaste: $18.71/month subscribe, $24.95 one-time
+### 3. Add Competitor Comparison Chart
+**File: `src/pages/Index.tsx`**
+- Add a new section between the Testimonials section (line 275) and the FAQ section (line 278)
+- Build a styled comparison table: illumé vs Oral B vs Phillips
+- Rows: 3in1 Cleaning, Plaque Removal, Gum Sensitivity, 60 Day Battery Life
+- illumé gets all checkmarks; competitors get partial marks matching the uploaded image
+- First row has a blue/purple highlight background
 
-- **Conditional Bundle & Save**: Only show for kit and toothpaste (products that have bundle data)
+### 4. Remove Black Background on Hero Toothbrush, Make It Bigger & Transparent
+**File: `src/pages/Index.tsx` (lines 94-101)**
+- Remove the dark `bg-foreground` card wrapper around the toothbrush image
+- Make the toothbrush image larger (h-[400px] or similar) and display it directly within the circle with a subtle drop shadow, no solid background box
 
-- **Conditional Pack Selector**: Only show "Full Oral Care Kit / Brush Only" toggle for the 3-in-1 kit product
+### 5. Make Subscribe & Save the Default for Kit Product; Remove "Brush Only" Option
+**File: `src/data/products.ts`**
+- Add a `subscribePricing` entry for `3-in-1-oral-kit` (e.g. $72.75/mo subscribe, $97 one-time, 25% save)
 
-- **Conditional "What's Included"**: Only show for the 3-in-1 kit. Hide for other products.
+**File: `src/pages/ProductDetail.tsx`**
+- Remove the "Brush Only" pack selector (lines 189-211) entirely
+- For ALL products (including kit and toothpaste), show Subscribe & Save as the primary/prominent option above bundle pricing
+- Change condition on line 214 from `hasSubscription && !hasBundles` to always show Subscribe & Save when available, making it the default selected option
+- Keep bundle options below as a secondary "Or Bundle & Save" section for kit/toothpaste
 
-- **Per-product features section**: Replace the hardcoded 4-feature grid with product-specific features. Hide entirely for products like brush heads that don't need it.
+### 6. Remove or Redirect "Get Your New Smile" Button
+**File: `src/pages/ProductDetail.tsx` (lines 323-325)**
+- Remove the "Get Your New Smile :)" button entirely
 
-- **Per-product FAQs**: Create product-specific FAQ arrays. Kit keeps current FAQs. Other products get relevant ones.
+### 7. Add Review Showcase from Screenshot
+**File: `src/pages/Index.tsx`**
+- Copy uploaded review screenshot image to `src/assets/review-showcase.png`
+- Replace the current 3-card text reviews in the "What Our Customers Say" section (lines 248-269) with a horizontally scrollable carousel of review cards matching the screenshot style:
+  - Header: "The Last Toothbrush You'll Ever Need" with 4.9 stars / 2,400+ reviews
+  - Category filter pills: Deep Cleaning, Whitening, Gum Health, Design, Sensitivity
+  - 8 review cards with "DEEP CLEANING" badge, star rating, bold quote, body text, and reviewer name with green verified dot
+  - Dot pagination at the bottom
+- Also add this review showcase section on ProductDetail page
 
-- **Sale countdown timer**: Add a "70% Sale ending in HH:MM:SS" countdown below the CTA (visible in all screenshots)
+### 8. Update Stats Section
+**File: `src/pages/Index.tsx` (line 229)**
+- Change `106+` Verified Reviews to `75k+` to match previously updated count
 
-- **Payment icons**: Add payment method icons (Visa, Mastercard, Apple Pay, etc.) below the CTA button, matching the screenshots
+### Files Modified
+- `src/pages/Index.tsx` — hero text, hero image, CBS video, comparison chart, review showcase, stats
+- `src/pages/ProductDetail.tsx` — remove brush-only, promote subscribe & save, remove "Get Your New Smile" button, add review showcase
+- `src/data/products.ts` — add kit subscribe pricing
 
-### 3. Files Modified
-- `src/data/products.ts` — updated prices, added per-product bundle maps
-- `src/pages/ProductDetail.tsx` — conditional rendering for all product-specific sections
+### New Assets
+- `src/assets/cbs-feature.mov` — CBS video
+- `src/assets/review-showcase.png` — review cards screenshot (reference for building the component, not embedded directly)
+- `src/assets/comparison-chart.png` — reference only, building as a styled component
 
