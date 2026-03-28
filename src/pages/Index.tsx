@@ -189,6 +189,31 @@ const Index = () => {
               className="w-auto h-[420px] max-h-none object-contain drop-shadow-[0_0_40px_rgba(200,184,154,0.35)]"
             />
           </div>
+
+          {/* Floating badges */}
+          <div className="absolute top-4 -right-4 bg-background border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm text-xs">
+            <span>🪥</span>
+            <span className="font-body font-medium">Brush</span>
+            <span className="font-body text-muted-foreground text-[10px]">360° sonic</span>
+          </div>
+
+          <div className="absolute top-1/2 -left-6 -translate-y-1/2 bg-background border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm text-xs">
+            <Droplets size={14} className="text-blue-400" />
+            <span className="font-body font-medium">Floss</span>
+            <span className="font-body text-muted-foreground text-[10px]">Water flosser</span>
+          </div>
+
+          <div className="absolute bottom-[26%] -right-6 bg-background border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm text-xs">
+            <span>👅</span>
+            <span className="font-body font-medium">Scrape</span>
+            <span className="font-body text-muted-foreground text-[10px]">Tongue scraper</span>
+          </div>
+
+          <div className="absolute -bottom-3 right-2 bg-background border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm text-xs">
+            <Zap size={14} className="text-gold" />
+            <span className="font-body font-medium">60-Day Battery</span>
+            <span className="font-body text-muted-foreground text-[10px]">Wireless charging</span>
+          </div>
         </div>
       </section>
 
