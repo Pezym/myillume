@@ -12,7 +12,7 @@ const Navbar = () => {
     { label: 'Shop', to: '/shop' },
     { label: 'Science', to: '#' },
     { label: 'The Routine', to: '#' },
-    { label: 'Affiliate', to: '#' },
+    { label: 'Affiliate', to: 'https://affilitrak.com/register?shop=www.myillume.com', external: true },
   ];
 
   return (
