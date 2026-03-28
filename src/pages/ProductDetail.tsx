@@ -368,8 +368,8 @@ const ProductDetail = () => {
         </div>
       </section>
 
-      {/* Video Testimonials */}
-      <VideoTestimonials />
+      {/* Video Testimonials - only on kit page */}
+      {product.id === '3-in-1-oral-kit' && <VideoTestimonials />}
 
       {/* Reviews */}
       <section className="max-w-7xl mx-auto px-6 py-12">
