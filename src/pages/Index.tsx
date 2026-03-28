@@ -26,7 +26,7 @@ const Index = () => {
       {/* Mobile: stacked layout — image on top, text below */}
       <section className="md:hidden relative min-h-[85vh] bg-background overflow-hidden">
         {/* Full-bleed background image */}
-        <img src={heroAmbassador} alt="Illumé ambassador" className="absolute inset-0 w-full h-full <img src={heroAmbassador} alt="Illumé ambassador" className="absolute inset-0 w-full h-full object-cover object-[center_25%]" /> />
+        <img src={heroAmbassador} alt="Illumé ambassador" className="absolute inset-0 w-full h-full object-cover object-[center_25%]" />
         {/* Vertical gradient fade — transparent at top, solid at bottom */}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-transparent" />
 
