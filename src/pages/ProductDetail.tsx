@@ -21,6 +21,7 @@ import { products, bundlePricing, subscribePricing, productBullets, productFeatu
 import { useCart } from '@/context/CartContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import VideoTestimonials from '@/components/VideoTestimonials';
+import ReviewShowcase from '@/components/ReviewShowcase';
 
 const productGalleries: Record<string, string[]> = {
   '3-in-1-oral-kit': [kitFull, modelBrushing, toothbrushImg, kitBox],
@@ -74,13 +75,13 @@ const ProductDetail = () => {
 
   const currentBundle = bundles.find(b => b.qty === selectedBundle) || bundles[0];
 
-  const displayPrice = hasBundles && currentBundle
-    ? currentBundle.price
-    : hasSubscription && subscription
-      ? (purchaseType === 'subscribe' ? subscription.subscribePrice : subscription.oneTimePrice)
+  const displayPrice = purchaseType === 'subscribe' && hasSubscription && subscription
+    ? subscription.subscribePrice
+    : hasBundles && currentBundle
+      ? currentBundle.price
       : product.price;
 
-  const displayOriginalPrice = hasBundles && currentBundle
+  const displayOriginalPrice = hasBundles && currentBundle && purchaseType === 'one-time'
     ? currentBundle.originalPrice
     : product.originalPrice;
 
@@ -97,11 +98,11 @@ const ProductDetail = () => {
       price: displayPrice,
       originalPrice: displayOriginalPrice,
       image: product.image,
-      variant: isKit
-        ? `${selectedBundle}x ${selectedPack === 'full-kit' ? 'Full Oral Care Kit' : 'Brush Only'}`
+      variant: purchaseType === 'subscribe'
+        ? 'Subscribe & Save'
         : hasBundles
           ? `${selectedBundle}x`
-          : purchaseType === 'subscribe' ? 'Subscribe & Save' : 'One-time purchase',
+          : 'One-time purchase',
     });
   };
 
@@ -185,33 +186,8 @@ const ProductDetail = () => {
               </ul>
             )}
 
-            {/* Pack Selector (Kit only) */}
-            {isKit && (
-              <div className="mb-6">
-                <p className="font-body text-xs tracking-[0.2em] uppercase mb-3">Pack</p>
-                <div className="flex gap-3">
-                  {[
-                    { id: 'full-kit', label: 'Full Oral Care Kit' },
-                    { id: 'brush-only', label: 'Brush Only' },
-                  ].map(pack => (
-                    <button
-                      key={pack.id}
-                      onClick={() => setSelectedPack(pack.id)}
-                      className={`font-body text-xs tracking-wider px-5 py-2.5 rounded-full border transition-colors ${
-                        selectedPack === pack.id
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'border-border text-muted-foreground hover:border-foreground'
-                      }`}
-                    >
-                      {pack.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Subscribe & Save (for strips, wand, toothpaste) */}
-            {hasSubscription && !hasBundles && (
+            {/* Subscribe & Save (shown for ALL products with subscription, as primary option) */}
+            {hasSubscription && (
               <div className="mb-6">
                 <p className="font-body text-xs tracking-[0.2em] uppercase mb-3">Choose Your Offer</p>
                 <div className="space-y-2">
@@ -259,26 +235,26 @@ const ProductDetail = () => {
               </div>
             )}
 
-            {/* Bundle Options (kit & toothpaste) */}
+            {/* Bundle Options (kit & toothpaste) — secondary */}
             {hasBundles && (
               <div className="mb-6">
-                <p className="font-body text-xs tracking-[0.2em] uppercase mb-3">Share the Health & Spread the Wealth</p>
+                <p className="font-body text-xs tracking-[0.2em] uppercase mb-3">Or Bundle & Save</p>
                 <div className="space-y-2">
                   {bundles.map(bundle => (
                     <button
                       key={bundle.qty}
-                      onClick={() => setSelectedBundle(bundle.qty)}
+                      onClick={() => { setSelectedBundle(bundle.qty); setPurchaseType('one-time'); }}
                       className={`w-full flex items-center justify-between p-4 rounded-xl border transition-all ${
-                        selectedBundle === bundle.qty
+                        selectedBundle === bundle.qty && purchaseType === 'one-time'
                           ? 'border-sand bg-sand/5'
                           : 'border-border hover:border-sand/50'
                       }`}
                     >
                       <div className="flex items-center gap-3">
                         <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                          selectedBundle === bundle.qty ? 'border-sand' : 'border-border'
+                          selectedBundle === bundle.qty && purchaseType === 'one-time' ? 'border-sand' : 'border-border'
                         }`}>
-                          {selectedBundle === bundle.qty && <div className="w-2 h-2 rounded-full bg-sand" />}
+                          {selectedBundle === bundle.qty && purchaseType === 'one-time' && <div className="w-2 h-2 rounded-full bg-sand" />}
                         </div>
                         <div className="text-left">
                           <span className="font-body text-sm font-medium">{bundle.label}</span>
@@ -299,19 +275,6 @@ const ProductDetail = () => {
               </div>
             )}
 
-            {/* Subscribe option for toothpaste (has both bundles AND subscribe) */}
-            {hasBundles && hasSubscription && (
-              <div className="mb-6 p-4 border border-dashed border-sand/50 rounded-xl bg-sand/5">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-body text-sm font-medium">Or Subscribe & Save {subscription!.savePercent}%</p>
-                    <p className="font-body text-xs text-muted-foreground">Auto-delivered monthly</p>
-                  </div>
-                  <span className="font-price text-sm font-bold">${subscription!.subscribePrice.toFixed(2)}/mo</span>
-                </div>
-              </div>
-            )}
-
             {/* CTA Buttons */}
             <div className="space-y-3 mb-4">
               <button
@@ -319,9 +282,6 @@ const ProductDetail = () => {
                 className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground font-body text-sm tracking-widest uppercase py-4 rounded-full hover:bg-sand hover:text-primary transition-colors"
               >
                 <ShoppingBag size={16} /> Add to Cart — ${displayPrice.toFixed(2)}
-              </button>
-              <button className="w-full bg-sand text-primary font-body text-sm tracking-widest uppercase py-4 rounded-full hover:bg-gold transition-colors">
-                Get Your New Smile :) →
               </button>
             </div>
 
@@ -419,29 +379,7 @@ const ProductDetail = () => {
           <p className="font-display text-4xl mb-1">4.9</p>
           <p className="font-body text-sm text-muted-foreground">{product.reviewCount} verified reviews</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            { name: 'Sarah M.', quote: "I've never had my teeth feel this clean after brushing at home. The water flosser attachment is genius.", rating: 5 },
-            { name: 'James K.', quote: 'Replaced three separate devices with one. The build quality is outstanding. Worth every penny.', rating: 5 },
-            { name: 'Emily R.', quote: 'My dentist noticed the difference at my last cleaning. The tongue scraper alone is worth it.', rating: 5 },
-          ].map((review, i) => (
-            <div key={i} className="bg-sand-light/50 border border-border rounded-2xl p-6">
-              <div className="flex gap-0.5 mb-3">
-                {Array.from({ length: review.rating }).map((_, j) => (
-                  <Star key={j} size={12} className="fill-gold text-gold" />
-                ))}
-              </div>
-              <p className="font-body text-sm text-muted-foreground leading-relaxed mb-4">"{review.quote}"</p>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-sand to-gold" />
-                <div>
-                  <p className="font-body text-sm font-medium">{review.name}</p>
-                  <p className="font-body text-[10px] text-muted-foreground">Verified Buyer</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ReviewShowcase />
       </section>
 
       {/* FAQ */}
