@@ -207,8 +207,8 @@ const Index = () => {
             return (
               <Link to={`/product/${kitProduct.id}`} className="group block mb-8">
                 <div className="flex flex-col md:flex-row gap-6 rounded-2xl overflow-hidden bg-muted">
-                  <div className="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto overflow-hidden">
-                    <img src={kitProduct.image} alt={kitProduct.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="relative w-full md:w-1/2 aspect-square md:aspect-auto overflow-hidden bg-white">
+                    <img src={kitProduct.image} alt={kitProduct.name} className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500" />
                     {kitProduct.badge && (
                       <span className="absolute top-3 left-3 bg-foreground text-background text-[10px] font-body tracking-wider uppercase px-2.5 py-1 rounded-full">{kitProduct.badge}</span>
                     )}
