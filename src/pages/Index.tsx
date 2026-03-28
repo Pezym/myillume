@@ -31,11 +31,6 @@ const Index = () => {
         {/* Text content below image */}
         <div className="px-6 pb-10 pt-8">
           <div className="max-w-xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 border border-foreground/20 rounded-full px-4 py-1.5 mb-8">
-              <span className="font-body text-[10px] tracking-[0.2em] uppercase font-semibold border border-foreground/30 rounded px-1.5 py-0.5">3-IN-1</span>
-              <span className="font-body text-xs tracking-wide text-muted-foreground">Oral Care System</span>
-            </div>
 
             <h1 className="font-display text-[3rem] leading-[1.02] tracking-tight mb-6">
               Reinvent the Way<br />you Brush with<br />
@@ -95,11 +90,6 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 py-16">
           {/* Left — Copy on solid background */}
           <div className="max-w-xl">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 border border-foreground/20 rounded-full px-4 py-1.5 mb-8">
-              <span className="font-body text-[10px] tracking-[0.2em] uppercase font-semibold border border-foreground/30 rounded px-1.5 py-0.5">3-IN-1</span>
-              <span className="font-body text-xs tracking-wide text-muted-foreground">Oral Care System</span>
-            </div>
 
             <h1 className="font-display text-[3.5rem] md:text-[4.5rem] lg:text-[5.2rem] leading-[1.02] tracking-tight mb-6">
               Reinvent the Way<br />you Brush with<br />
