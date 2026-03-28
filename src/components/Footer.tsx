@@ -45,13 +45,21 @@ const Footer = () => {
           <div>
             <h4 className="font-body text-xs tracking-[0.2em] uppercase mb-4">Company</h4>
             <ul className="space-y-2">
-              {['About illumé', 'Become an Affiliate', 'Contact Us'].map(item => (
-                <li key={item}>
-                  <a href="#" className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <Link to="/" onClick={() => window.scrollTo(0, 0)} className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
+                  About illumé
+                </Link>
+              </li>
+              <li>
+                <a href="https://affilitrak.com/register?shop=www.myillume.com" target="_blank" rel="noopener noreferrer" className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
+                  Become an Affiliate
+                </a>
+              </li>
+              <li>
+                <a href="mailto:info@myillume.com" className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
+                  Contact Us
+                </a>
+              </li>
             </ul>
           </div>
         </div>
