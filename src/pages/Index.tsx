@@ -20,8 +20,8 @@ const Index = () => {
       {/* Hero */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-background">
         {/* Ambassador background */}
-        <img src={heroAmbassador} alt="" className="absolute inset-0 w-full h-full object-cover object-top opacity-[0.12] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none" />
+        <img src={heroAmbassador} alt="" className="absolute inset-0 w-full h-full object-cover object-top opacity-[0.18] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 py-16">
           {/* Left — Copy */}
           <div className="max-w-xl">
@@ -132,22 +132,45 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Mobile — Auto-scrolling product carousel */}
-          <div className="md:hidden overflow-hidden mt-6">
-            <div className="animate-marquee flex gap-4 w-max">
-              {[...products, ...products].map((product, i) => (
+          {/* Mobile — Static 3-in-1 kit + Auto-scrolling other products */}
+          <div className="md:hidden mt-6 space-y-4">
+            {/* Static featured product */}
+            {(() => {
+              const kit = products.find(p => p.id === '3-in-1-oral-kit');
+              if (!kit) return null;
+              return (
                 <Link
-                  key={`${product.id}-${i}`}
-                  to={`/product/${product.id}`}
-                  className="flex-shrink-0 w-36 bg-background border border-border rounded-xl p-3 hover:shadow-md transition-shadow"
+                  to={`/product/${kit.id}`}
+                  className="flex items-center gap-4 bg-background border border-border rounded-xl p-3 hover:shadow-md transition-shadow"
                 >
-                  <div className="aspect-square rounded-lg overflow-hidden bg-sand-light mb-2">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                  <div className="w-20 h-20 rounded-lg overflow-hidden bg-sand-light flex-shrink-0">
+                    <img src={kit.image} alt={kit.name} className="w-full h-full object-cover" />
                   </div>
-                  <p className="font-body text-xs font-medium leading-tight truncate">{product.name}</p>
-                  <p className="font-body text-xs text-muted-foreground mt-1">${product.price.toFixed(2)}</p>
+                  <div>
+                    <p className="font-body text-sm font-medium leading-tight">{kit.name}</p>
+                    <p className="font-body text-xs text-muted-foreground mt-1">${kit.price.toFixed(2)}</p>
+                    <span className="inline-block font-body text-[9px] tracking-widest uppercase text-sand mt-1">Best Seller</span>
+                  </div>
                 </Link>
-              ))}
+              );
+            })()}
+            {/* Scrolling carousel for other products */}
+            <div className="overflow-hidden">
+              <div className="animate-marquee flex gap-4 w-max">
+                {[...products.filter(p => p.id !== '3-in-1-oral-kit'), ...products.filter(p => p.id !== '3-in-1-oral-kit')].map((product, i) => (
+                  <Link
+                    key={`${product.id}-${i}`}
+                    to={`/product/${product.id}`}
+                    className="flex-shrink-0 w-36 bg-background border border-border rounded-xl p-3 hover:shadow-md transition-shadow"
+                  >
+                    <div className="aspect-square rounded-lg overflow-hidden bg-sand-light mb-2">
+                      <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                    </div>
+                    <p className="font-body text-xs font-medium leading-tight truncate">{product.name}</p>
+                    <p className="font-body text-xs text-muted-foreground mt-1">${product.price.toFixed(2)}</p>
+                  </Link>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -177,45 +200,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Mobile — Toothbrush circle below As Seen On */}
-      <section className="md:hidden py-12 flex justify-center">
-        <div className="relative w-[320px] h-[320px]">
-          <div className="absolute inset-0 rounded-full border border-sand/30" />
-          <div className="absolute inset-3 rounded-full border border-sand/15" />
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center overflow-hidden rounded-full w-full h-full">
-            <img
-              src={toothbrushImg}
-              alt="illumé 3-in-1 Toothbrush"
-              className="w-auto h-[420px] max-h-none object-contain drop-shadow-[0_0_40px_rgba(200,184,154,0.35)]"
-            />
-          </div>
-
-          {/* Floating badges */}
-          <div className="absolute top-4 -right-4 bg-background border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm text-xs">
-            <span>🪥</span>
-            <span className="font-body font-medium">Brush</span>
-            <span className="font-body text-muted-foreground text-[10px]">360° sonic</span>
-          </div>
-
-          <div className="absolute top-1/2 -left-6 -translate-y-1/2 bg-background border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm text-xs">
-            <Droplets size={14} className="text-blue-400" />
-            <span className="font-body font-medium">Floss</span>
-            <span className="font-body text-muted-foreground text-[10px]">Water flosser</span>
-          </div>
-
-          <div className="absolute bottom-[26%] -right-6 bg-background border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm text-xs">
-            <span>👅</span>
-            <span className="font-body font-medium">Scrape</span>
-            <span className="font-body text-muted-foreground text-[10px]">Tongue scraper</span>
-          </div>
-
-          <div className="absolute -bottom-3 right-2 bg-background border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm text-xs">
-            <Zap size={14} className="text-gold" />
-            <span className="font-body font-medium">60-Day Battery</span>
-            <span className="font-body text-muted-foreground text-[10px]">Wireless charging</span>
-          </div>
-        </div>
-      </section>
 
       {/* Features: Brush, Floss, Scrape */}
       <section className="py-24">
@@ -241,31 +225,28 @@ const Index = () => {
 
       {/* Facts Backed by Science */}
       <section className="py-24 bg-foreground text-background">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <div>
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-10">
             <p className="font-body text-[10px] tracking-[0.3em] uppercase text-sand mb-4">Facts Backed by Science</p>
             <h2 className="font-display text-3xl md:text-4xl mb-3 leading-tight">Modern Toothbrushes Leave your Dental Health Deficient</h2>
-            <p className="font-body text-base text-background/60 mb-10">illumé is the Only Toothbrush That Fills in the Gaps!</p>
-            <div className="space-y-8">
-              {[
-                { pct: '96%', text: 'of Americans will develop a cavity at some point in their life due to improper', bold: 'brushing habits.' },
-                { pct: '60%', text: 'more plaque is removed when you', bold: 'floss alongside brushing.' },
-                { pct: '55%', text: 'of Americans admit they', bold: 'don\'t floss daily.' },
-                { pct: '53%', text: 'of bad breath cases originate from bacteria on the', bold: 'tongue.' },
-              ].map((stat, i) => (
-                <div key={i} className="flex items-start gap-5">
-                  <div className="flex-shrink-0 w-16 h-16 rounded-full border-[3px] border-sand flex items-center justify-center">
-                    <span className="font-display text-lg text-sand">{stat.pct}</span>
-                  </div>
-                  <p className="font-body text-sm text-background/70 leading-relaxed pt-2">
-                    {stat.text} <span className="font-semibold text-background">{stat.bold}</span>
-                  </p>
-                </div>
-              ))}
-            </div>
+            <p className="font-body text-base text-background/60">illumé is the Only Toothbrush That Fills in the Gaps!</p>
           </div>
-          <div className="aspect-[3/4] rounded-3xl overflow-hidden">
-            <img src={toothpasteBottle} alt="illumé oral care" className="w-full h-full object-cover" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
+            {[
+              { pct: '96%', text: 'of Americans will develop a cavity at some point in their life due to improper', bold: 'brushing habits.' },
+              { pct: '60%', text: 'more plaque is removed when you', bold: 'floss alongside brushing.' },
+              { pct: '55%', text: 'of Americans admit they', bold: 'don\'t floss daily.' },
+              { pct: '53%', text: 'of bad breath cases originate from bacteria on the', bold: 'tongue.' },
+            ].map((stat, i) => (
+              <div key={i} className="flex items-start gap-5">
+                <div className="flex-shrink-0 w-16 h-16 rounded-full border-[3px] border-sand flex items-center justify-center">
+                  <span className="font-display text-lg text-sand">{stat.pct}</span>
+                </div>
+                <p className="font-body text-sm text-background/70 leading-relaxed pt-2">
+                  {stat.text} <span className="font-semibold text-background">{stat.bold}</span>
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

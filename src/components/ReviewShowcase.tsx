@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 
 const categories = ['Deep Cleaning', 'Whitening', 'Gum Health', 'Design', 'Sensitivity'];
 
@@ -17,25 +18,13 @@ const reviews = [
 
 const ReviewShowcase = () => {
   const [activeCategory, setActiveCategory] = useState('Deep Cleaning');
-  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', slidesToScroll: 1, containScroll: 'trimSnaps' });
+  const [emblaRef, emblaApi] = useEmblaCarousel({ align: 'start', slidesToScroll: 1, containScroll: 'trimSnaps', loop: true }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
 
   const filteredReviews = reviews.filter(r => r.badge === activeCategory.toUpperCase());
   const displayReviews = filteredReviews.length > 0 ? filteredReviews : reviews;
 
   return (
     <div>
-      <div className="text-center mb-8">
-        <h3 className="font-display text-2xl md:text-3xl mb-2">The Last Toothbrush You'll Ever Need</h3>
-        <div className="flex items-center justify-center gap-2">
-          <div className="flex gap-0.5">
-            {Array.from({ length: 5 }).map((_, j) => (
-              <Star key={j} size={16} className="fill-gold text-gold" />
-            ))}
-          </div>
-          <span className="font-body text-sm text-muted-foreground">4.9 · 2,400+ reviews</span>
-        </div>
-      </div>
-
       <div className="flex items-center justify-center gap-2 flex-wrap mb-8">
         {categories.map(cat => (
           <button
