@@ -19,6 +19,7 @@ import cbsVideo from '@/assets/cbs-feature.mov';
 import heroAmbassador from '@/assets/hero-ambassador.jpg';
 
 const Index = () => {
+  const [quizOpen, setQuizOpen] = useState(false);
   return (
     <div>
       {/* Hero */}
@@ -51,12 +52,12 @@ const Index = () => {
               >
                 Shop illumé <ArrowRight size={15} />
               </Link>
-              <Link
-                to="/product/3-in-1-oral-kit"
+              <button
+                onClick={() => setQuizOpen(true)}
                 className="inline-flex items-center gap-1 font-body text-sm tracking-wider hover:gap-2 transition-all"
               >
                 Take The Quiz <ArrowRight size={15} />
-              </Link>
+              </button>
             </div>
 
             {/* Stats bar */}
@@ -115,12 +116,12 @@ const Index = () => {
               >
                 Shop illumé <ArrowRight size={15} />
               </Link>
-              <Link
-                to="/product/3-in-1-oral-kit"
+              <button
+                onClick={() => setQuizOpen(true)}
                 className="inline-flex items-center gap-1 font-body text-sm tracking-wider hover:gap-2 transition-all"
               >
                 Take The Quiz <ArrowRight size={15} />
-              </Link>
+              </button>
             </div>
 
             {/* Stats bar */}
