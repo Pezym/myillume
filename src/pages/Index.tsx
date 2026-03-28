@@ -475,6 +475,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      <ProductQuiz open={quizOpen} onOpenChange={setQuizOpen} />
     </div>
   );
 };
