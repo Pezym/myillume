@@ -21,6 +21,7 @@ import { products, bundlePricing, subscribePricing, productBullets, productFeatu
 import { useCart } from '@/context/CartContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import VideoTestimonials from '@/components/VideoTestimonials';
+import ReviewShowcase from '@/components/ReviewShowcase';
 
 const productGalleries: Record<string, string[]> = {
   '3-in-1-oral-kit': [kitFull, modelBrushing, toothbrushImg, kitBox],
@@ -74,13 +75,13 @@ const ProductDetail = () => {
 
   const currentBundle = bundles.find(b => b.qty === selectedBundle) || bundles[0];
 
-  const displayPrice = hasBundles && currentBundle
-    ? currentBundle.price
-    : hasSubscription && subscription
-      ? (purchaseType === 'subscribe' ? subscription.subscribePrice : subscription.oneTimePrice)
+  const displayPrice = purchaseType === 'subscribe' && hasSubscription && subscription
+    ? subscription.subscribePrice
+    : hasBundles && currentBundle
+      ? currentBundle.price
       : product.price;
 
-  const displayOriginalPrice = hasBundles && currentBundle
+  const displayOriginalPrice = hasBundles && currentBundle && purchaseType === 'one-time'
     ? currentBundle.originalPrice
     : product.originalPrice;
 
