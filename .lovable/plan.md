@@ -1,32 +1,28 @@
 
 
-# Plan: Quip-Style Mobile Product Showcase
+# Plan: Full-Visibility Hero Background Image
 
 ## What We're Doing
 
-Redesigning the mobile homepage product section to match the Quip-style layout from the reference screenshots: a 2-column product grid with large product cards, "Best seller" badges, star ratings, review counts, and a section header with a "Shop bestsellers" link — replacing the current small static card + marquee carousel.
+Remove the gradient overlay on the hero background image so it's fully visible, and stack the layout vertically on mobile (image on top, text below) so both are clear. On desktop, use a semi-transparent text backdrop instead of a full gradient.
 
 ## Changes
 
-### File: `src/pages/Index.tsx` (lines 135-175)
+### File: `src/pages/Index.tsx`
 
-**Replace the current mobile hero product section** (static kit card + auto-scrolling marquee) with:
+1. **Remove the gradient overlay div** (line 24) — delete the `bg-gradient-to-r from-background via-background/70 to-transparent` div entirely
 
-1. **Section header row**: Left-aligned "Reinvent Your Routine" heading + right-aligned "Shop bestsellers" link (matches Quip's "Refresh your routine / Shop bestsellers" layout)
+2. **Increase image opacity** (line 23) — change `opacity-[0.18]` to `opacity-100` so the image is fully visible
 
-2. **2-column product grid**: All products displayed in a `grid grid-cols-2 gap-3` layout with:
-   - Tall product cards (`aspect-[3/4]` image area) with rounded corners and light background
-   - "Best seller" badge on the kit product (small green/sand pill)
-   - Product name below the image
-   - "Starting at $XX.00" pricing format
-   - Star rating row (e.g., ★★★★★ 4.8 (75k+))
-   - Each card links to its product page
+3. **Add a text-area backdrop on desktop** — wrap the left-column `<div>` (line 27) with a semi-transparent background (`bg-background/80 backdrop-blur-sm rounded-2xl p-8`) so text remains readable over the full image
 
-3. **Horizontal scroll option**: If more than 4 products, the grid scrolls or wraps naturally. For now with 4 products, a clean 2×2 grid.
-
-This section remains `md:hidden` — desktop layout is unchanged.
+4. **Mobile layout**: On mobile, switch to a stacked layout:
+   - Show the hero image as a prominent block at the top (not as a background) with `aspect-[4/3]` and `object-cover`
+   - Text content sits below the image on a solid background
+   - Use `md:hidden` / `hidden md:block` to toggle between stacked (mobile) and overlay (desktop) layouts
 
 ### Summary
-- Desktop: no changes
-- Mobile hero: replaces marquee + static card with a polished 2-column product grid inspired by Quip's layout
+- Image becomes fully visible with no gradient
+- Desktop: text floats over image with a frosted-glass card backdrop
+- Mobile: image shown prominently above text for clean readability
 
