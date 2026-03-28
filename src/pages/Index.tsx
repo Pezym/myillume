@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Star, ArrowRight, ChevronRight } from 'lucide-react';
+import toothbrushImg from '@/assets/toothbrush.png';
 
 const Index = () => {
   return (
@@ -31,11 +32,9 @@ const Index = () => {
               </Link>
             </div>
           </div>
-          <div className="relative">
-            <div className="aspect-square bg-sand/20 rounded-full flex items-center justify-center">
-              <div className="w-3/4 h-3/4 bg-sand-light rounded-3xl flex items-center justify-center">
-                <span className="font-display italic text-6xl text-sand/50">illumé</span>
-              </div>
+          <div className="relative flex items-center justify-center">
+            <div className="aspect-square bg-sand/10 rounded-full flex items-center justify-center p-12">
+              <img src={toothbrushImg} alt="illumé 3-in-1 Toothbrush" className="w-auto h-full max-h-[500px] object-contain drop-shadow-2xl" />
             </div>
           </div>
         </div>
