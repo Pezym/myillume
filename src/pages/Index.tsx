@@ -3,6 +3,9 @@ import { Star, ArrowRight, ChevronRight, Droplets, Zap } from 'lucide-react';
 import toothbrushImg from '@/assets/toothbrush.png';
 import lifestyleSmile from '@/assets/lifestyle-brushing-smile.jpg';
 import lifestyleClose from '@/assets/lifestyle-brushing-close.jpg';
+import kitFullImg from '@/assets/kit-full.jpg';
+import toothpasteBottle from '@/assets/toothpaste-bottle.jpg';
+import brushHeadsImg from '@/assets/brush-heads-close.jpg';
 
 const Index = () => {
   return (
@@ -165,16 +168,18 @@ const Index = () => {
           <h2 className="font-display text-3xl md:text-4xl text-center mb-14">Shop by Category</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              { name: 'Kits', desc: 'Complete oral care systems' },
-              { name: 'Oral Care', desc: 'Toothpaste & whitening' },
-              { name: 'Accessories', desc: 'Brush heads & cases' },
+              { name: 'Kits', desc: 'Complete oral care systems', image: kitFullImg },
+              { name: 'Oral Care', desc: 'Toothpaste & whitening', image: toothpasteBottle },
+              { name: 'Accessories', desc: 'Brush heads & cases', image: brushHeadsImg },
             ].map(cat => (
               <Link
                 key={cat.name}
                 to="/shop"
                 className="group bg-background p-8 rounded-3xl border border-border hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300"
               >
-                <div className="aspect-square bg-gradient-to-br from-sand-light to-sand/20 rounded-2xl mb-6" />
+                <div className="aspect-square rounded-2xl mb-6 overflow-hidden bg-sand-light/30">
+                  <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+                </div>
                 <h3 className="font-display text-xl mb-1">{cat.name}</h3>
                 <p className="font-body text-sm text-muted-foreground">{cat.desc}</p>
                 <span className="inline-flex items-center gap-1 font-body text-[10px] tracking-[0.2em] uppercase text-sand mt-4 group-hover:gap-2 transition-all">
