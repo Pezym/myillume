@@ -27,7 +27,7 @@ const Shop = () => {
       {/* Filter Bar */}
       <section id="products" className="max-w-7xl mx-auto px-6 pt-14 pb-8">
         <div className="flex items-center justify-between flex-wrap gap-4">
-          <h2 className="font-display text-2xl">Our Products</h2>
+          <h2 className="font-display text-2xl">Reinvent Your Routine</h2>
           <div className="flex items-center gap-3">
             {categories.map(cat => (
               <button
