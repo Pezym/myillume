@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Star, ShoppingBag, ArrowRight } from 'lucide-react';
 import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
+import toothbrushImg from '@/assets/toothbrush.png';
 
 const categories = ['All', 'Kits', 'Oral Care', 'Accessories'];
 
