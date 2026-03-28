@@ -132,45 +132,41 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Mobile — Static 3-in-1 kit + Auto-scrolling other products */}
-          <div className="md:hidden mt-6 space-y-4">
-            {/* Static featured product */}
-            {(() => {
-              const kit = products.find(p => p.id === '3-in-1-oral-kit');
-              if (!kit) return null;
-              return (
+          {/* Mobile — Quip-style 2-column product grid */}
+          <div className="md:hidden mt-8 px-1">
+            {/* Header row */}
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-heading text-lg font-semibold">Reinvent Your Routine</h2>
+              <Link to="/shop" className="font-body text-xs text-primary underline underline-offset-2" onClick={() => window.scrollTo(0, 0)}>
+                Shop bestsellers
+              </Link>
+            </div>
+            {/* 2-column grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {products.map((product) => (
                 <Link
-                  to={`/product/${kit.id}`}
-                  className="flex items-center gap-4 bg-background border border-border rounded-xl p-3 hover:shadow-md transition-shadow"
+                  key={product.id}
+                  to={`/product/${product.id}`}
+                  className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
                 >
-                  <div className="w-20 h-20 rounded-lg overflow-hidden bg-sand-light flex-shrink-0">
-                    <img src={kit.image} alt={kit.name} className="w-full h-full object-cover" />
+                  <div className="aspect-[3/4] bg-sand-light relative">
+                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
+                    {product.id === '3-in-1-oral-kit' && (
+                      <span className="absolute top-2 left-2 bg-primary text-primary-foreground font-body text-[10px] font-semibold tracking-wide uppercase px-2 py-0.5 rounded-full">
+                        Best seller
+                      </span>
+                    )}
                   </div>
-                  <div>
-                    <p className="font-body text-sm font-medium leading-tight">{kit.name}</p>
-                    <p className="font-body text-xs text-muted-foreground mt-1">${kit.price.toFixed(2)}</p>
-                    <span className="inline-block font-body text-[9px] tracking-widest uppercase text-sand mt-1">Best Seller</span>
+                  <div className="p-3">
+                    <p className="font-body text-xs font-medium leading-tight line-clamp-2 mb-1">{product.name}</p>
+                    <p className="font-body text-xs text-muted-foreground mb-1">Starting at ${product.price.toFixed(2)}</p>
+                    <div className="flex items-center gap-1">
+                      <span className="text-gold text-[10px]">★★★★★</span>
+                      <span className="font-body text-[10px] text-muted-foreground">{product.rating} ({product.reviewCount})</span>
+                    </div>
                   </div>
                 </Link>
-              );
-            })()}
-            {/* Scrolling carousel for other products */}
-            <div className="overflow-hidden">
-              <div className="animate-marquee flex gap-4 w-max">
-                {[...products.filter(p => p.id !== '3-in-1-oral-kit'), ...products.filter(p => p.id !== '3-in-1-oral-kit')].map((product, i) => (
-                  <Link
-                    key={`${product.id}-${i}`}
-                    to={`/product/${product.id}`}
-                    className="flex-shrink-0 w-36 bg-background border border-border rounded-xl p-3 hover:shadow-md transition-shadow"
-                  >
-                    <div className="aspect-square rounded-lg overflow-hidden bg-sand-light mb-2">
-                      <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-                    </div>
-                    <p className="font-body text-xs font-medium leading-tight truncate">{product.name}</p>
-                    <p className="font-body text-xs text-muted-foreground mt-1">${product.price.toFixed(2)}</p>
-                  </Link>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </div>
