@@ -1,25 +1,29 @@
 
 
-# Plan: Separate Mobile Hero Image from Text
+# Plan: Rounded Hero Image with Margins (Carpe Style)
 
 ## What We're Doing
 
-Remove the gradient overlay on mobile and split the hero into two distinct sections: the hero banner image displayed as a standalone block on top, followed by the "Reinvent the Way" text section below it on a solid background.
+Style the mobile hero image to match the Carpe reference: add horizontal margins/padding and rounded corners so the image appears as a contained card rather than edge-to-edge, similar to how Carpe displays their product pile photo.
 
 ## Changes
 
-### File: `src/pages/Index.tsx` (lines 27-87)
+### File: `src/pages/Index.tsx` (line 27-29)
 
-Replace the current mobile hero (overlay layout with gradient) with a stacked layout:
+1. Add horizontal padding (`px-4`) to the image's parent container
+2. Apply rounded corners (`rounded-2xl`) to the image
+3. Add slight top padding (`pt-4`) so the image doesn't touch the navbar directly
 
-1. **Image section**: A standalone `<img>` block with `aspect-[4/3]` or similar, `object-cover`, `object-[center_25%]` — no gradient, no overlay, just the full image
-2. **Text section**: Below the image, on a solid `bg-background`, containing the badge, heading, subtitle, CTAs, and stats bar — exactly as they are now but without needing `relative z-10` or `min-h-[85vh]`
+Change:
+```
+<section className="md:hidden bg-background overflow-hidden">
+  <img src={heroAmbassador} alt="Illumé ambassador" className="w-full aspect-[4/3] object-cover object-[center_25%]" />
+```
+To:
+```
+<section className="md:hidden bg-background overflow-hidden px-4 pt-3">
+  <img src={heroAmbassador} alt="Illumé ambassador" className="w-full aspect-[4/3] object-cover object-[center_25%] rounded-2xl" />
+```
 
-Remove:
-- The `min-h-[85vh]` constraint on the wrapper
-- The gradient `<div>` overlay (line 31)
-- The `absolute inset-0` positioning on the image (line 29)
-- The `justify-end` / `min-h-[85vh]` on the text container (line 34)
-
-Desktop hero remains unchanged.
+Single CSS-only change, no structural modifications. Desktop unchanged.
 
