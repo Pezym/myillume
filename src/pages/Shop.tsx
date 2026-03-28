@@ -5,6 +5,8 @@ import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import toothbrushImg from '@/assets/toothbrush.png';
 import kitFullImg from '@/assets/kit-full.jpg';
+import ReviewShowcase from '@/components/ReviewShowcase';
+import VideoTestimonials from '@/components/VideoTestimonials';
 
 const categories = ['All', 'Kits', 'Oral Care', 'Accessories'];
 
@@ -20,27 +22,6 @@ const Shop = () => {
 
   return (
     <div>
-      {/* Shop Hero */}
-      <section className="bg-sand-light/50">
-        <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-5 gap-10 items-center">
-          <div className="md:col-span-2">
-            <p className="font-body text-xs tracking-[0.3em] uppercase text-sand mb-3">The Illumé Collection</p>
-            <h1 className="font-display text-4xl md:text-5xl mb-4">Shop the Illumé Routine</h1>
-            <p className="font-body text-sm text-muted-foreground mb-6 leading-relaxed">
-              Bundle up and save up to 70%. Use code <strong>NewSmile</strong> at checkout.
-            </p>
-            <a
-              href="#products"
-              className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-body text-xs tracking-widest uppercase px-6 py-3 rounded-full hover:bg-sand hover:text-primary transition-colors"
-            >
-              Shop All Products <ArrowRight size={14} />
-            </a>
-          </div>
-          <div className="md:col-span-3 aspect-[3/2] rounded-2xl overflow-hidden">
-            <img src={kitFullImg} alt="illumé 3-in-1 Oral Kit" className="w-full h-full object-cover" />
-          </div>
-        </div>
-      </section>
 
       {/* Filter Bar */}
       <section id="products" className="max-w-7xl mx-auto px-6 pt-14 pb-8">
@@ -196,6 +177,19 @@ const Shop = () => {
                 </button>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials & Reviews */}
+      <section className="py-24">
+        <div className="max-w-7xl mx-auto px-6">
+          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground text-center mb-3">Reviews</p>
+          <h2 className="font-display text-3xl md:text-4xl text-center mb-4">What Our Customers Say</h2>
+          <p className="font-body text-sm text-muted-foreground text-center mb-14">Real reviews from real smiles.</p>
+          <ReviewShowcase />
+          <div className="mt-16">
+            <VideoTestimonials />
           </div>
         </div>
       </section>
