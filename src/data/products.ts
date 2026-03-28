@@ -1,4 +1,5 @@
 import toothbrushImg from '@/assets/toothbrush.png';
+import toothpasteImg from '@/assets/lifestyle-toothpaste.jpg';
 
 export interface Product {
   id: string;
@@ -36,7 +37,7 @@ export const products: Product[] = [
     originalPrice: 24.99,
     rating: 4.8,
     reviewCount: 54,
-    image: '/placeholder.svg',
+    image: toothpasteImg,
     description: 'Color-correcting formula for an instantly brighter smile.',
     badge: 'SAVE 40%',
   },
