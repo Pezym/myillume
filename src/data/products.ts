@@ -1,5 +1,5 @@
 import toothbrushImg from '@/assets/toothbrush.png';
-import toothpasteImg from '@/assets/lifestyle-toothpaste.jpg';
+import toothpasteImg from '@/assets/toothpaste-boxed.jpg';
 import kitFullImg from '@/assets/kit-full.jpg';
 import brushHeads3PackImg from '@/assets/brush-heads-3pack.jpg';
 
