@@ -1,27 +1,41 @@
 
 
-# Plan: Mobile Hero Rearrangement & Product Carousel
-
-## What We're Doing
-
-On mobile only, replace the toothbrush circle graphic in the hero with an auto-scrolling product carousel, and move the toothbrush graphic to appear below the "As Seen On" section.
+# Plan: Multiple UI Updates
 
 ## Changes
 
-### File: `src/pages/Index.tsx`
+### 1. Mobile hero carousel: 3-in-1 kit static above, rest in carousel
+**File: `src/pages/Index.tsx` (lines 135-152)**
+- Find the 3-in-1 oral kit product and render it as a static, prominent card above the carousel (linked to its product page)
+- Filter it out of the auto-scrolling carousel so only the other products scroll
 
-1. **Import products data** from `@/data/products.ts` and `Link` from `react-router-dom`
+### 2. Replace hero background image
+- Copy `user-uploads://hero_2.webp` → `src/assets/hero-ambassador.jpg` (overwrite)
+- Update opacity from `opacity-[0.12]` to `opacity-[0.18]` for more visibility
+- Adjust the gradient overlay to be slightly less aggressive (`via-background/70` instead of `/80`)
 
-2. **Hero right column (lines 78-135)**: Wrap the existing toothbrush circle in a `hidden md:flex` container so it only shows on desktop
+### 3. Remove mobile toothbrush circle entirely
+**File: `src/pages/Index.tsx` (lines 180-218)**
+- Delete the entire `md:hidden` section that renders the toothbrush circle with floating badges below "As Seen On"
 
-3. **Add mobile product carousel** above/replacing the toothbrush on mobile: a `md:hidden` auto-scrolling horizontal strip showing product cards (image + name + price) that link to their product pages. Uses CSS animation (`@keyframes scroll`) for continuous auto-scroll, duplicating items for seamless looping.
+### 4. Remove toothpaste image from "Facts Backed by Science"
+**File: `src/pages/Index.tsx` (lines 267-269)**
+- Remove the right-column image (`toothpasteBottle`) from the Facts section
+- Make the left column full-width (`md:grid-cols-1` or remove grid, center content)
 
-4. **After the "As Seen On" section (after line 161)**: Add a new `md:hidden` section that renders the toothbrush circle graphic (same markup as the current hero circle, but smaller — ~320px). This moves the toothbrush visual below "As Seen On" on mobile only.
+### 5. Shop header: "Our Products" → "Reinvent Your Routine"
+**File: `src/pages/Shop.tsx` (line 30)**
+- Change text
 
-### File: `src/index.css`
-- Add a `@keyframes marquee` animation for the auto-scrolling product strip
+### 6. ReviewShowcase: Remove "The Last Toothbrush" heading, make reviews auto-carousel
+**File: `src/components/ReviewShowcase.tsx`**
+- Remove the "The Last Toothbrush You'll Ever Need" heading and rating line (lines 27-37)
+- Add Embla autoplay plugin for auto-scrolling: `import Autoplay from 'embla-carousel-autoplay'` and pass `[Autoplay({ delay: 3000, stopOnInteraction: false })]` to `useEmblaCarousel`
+- This affects both homepage and product page usage since they share the component
 
-### Summary
-- Desktop: no change — toothbrush stays in hero
-- Mobile: hero shows auto-scrolling product cards → "As Seen On" → toothbrush circle graphic
+### Files Modified
+- `src/pages/Index.tsx` — hero carousel split, remove mobile toothbrush circle, remove facts image
+- `src/pages/Shop.tsx` — heading text
+- `src/components/ReviewShowcase.tsx` — remove heading, add autoplay
+- `src/assets/hero-ambassador.jpg` — replaced with new image
 
