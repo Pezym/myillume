@@ -4,6 +4,9 @@ import { Star, ShoppingBag, Truck, RotateCcw, Shield, ChevronRight } from 'lucid
 import modelBrushing from '@/assets/model-brushing.jpg';
 import kitFull from '@/assets/kit-full.jpg';
 import kitBox from '@/assets/kit-box.jpg';
+import kitAngle1 from '@/assets/kit-angle-1.jpg';
+import kitAngle2 from '@/assets/kit-angle-2.jpg';
+import kitAngle3 from '@/assets/kit-angle-3.jpg';
 import toothbrushImg from '@/assets/toothbrush.png';
 import stripsBox from '@/assets/strips-box.png';
 import stripsModel from '@/assets/strips-model.png';
@@ -24,7 +27,7 @@ import VideoTestimonials from '@/components/VideoTestimonials';
 import ReviewShowcase from '@/components/ReviewShowcase';
 
 const productGalleries: Record<string, string[]> = {
-  '3-in-1-oral-kit': [kitFull, modelBrushing, toothbrushImg, kitBox],
+  '3-in-1-oral-kit': [kitAngle1, kitFull, kitAngle2, kitAngle3, modelBrushing, kitBox],
   'purple-toothpaste': [toothpasteImg, toothpasteModel, toothpasteTrio],
   'whitening-strips': [stripsBox, stripsModel, stripsSide, stripsProduct],
   'whitening-wand': [wandBoxed, wandProduct, wandClosed, wandBack],
