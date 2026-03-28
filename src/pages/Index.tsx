@@ -11,12 +11,16 @@ import kitFullImg from '@/assets/kit-full.jpg';
 import toothpasteBottle from '@/assets/toothpaste-bottle.jpg';
 import brushHeadsImg from '@/assets/brush-heads-close.jpg';
 import cbsVideo from '@/assets/cbs-feature.mov';
+import heroAmbassador from '@/assets/hero-ambassador.jpg';
 
 const Index = () => {
   return (
     <div>
       {/* Hero */}
       <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-background">
+        {/* Ambassador background */}
+        <img src={heroAmbassador} alt="" className="absolute inset-0 w-full h-full object-cover object-top opacity-[0.12] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 py-16">
           {/* Left — Copy */}
           <div className="max-w-xl">
