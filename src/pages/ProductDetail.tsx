@@ -14,6 +14,8 @@ import wandProduct from '@/assets/wand-product.png';
 import wandClosed from '@/assets/wand-closed.png';
 import wandBack from '@/assets/wand-back.png';
 import toothpasteImg from '@/assets/toothpaste-boxed.jpg';
+import toothpasteModel from '@/assets/toothpaste-model.jpg';
+import toothpasteTrio from '@/assets/toothpaste-trio.png';
 import brushHeads3Pack from '@/assets/brush-heads-3pack.jpg';
 import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
@@ -22,7 +24,7 @@ import VideoTestimonials from '@/components/VideoTestimonials';
 
 const productGalleries: Record<string, string[]> = {
   '3-in-1-oral-kit': [kitFull, modelBrushing, toothbrushImg, kitBox],
-  'purple-toothpaste': [toothpasteImg],
+  'purple-toothpaste': [toothpasteImg, toothpasteModel, toothpasteTrio],
   'whitening-strips': [stripsBox, stripsModel, stripsSide, stripsProduct],
   'whitening-wand': [wandBoxed, wandProduct, wandClosed, wandBack],
   'brush-heads-3pack': [brushHeads3Pack],
@@ -95,7 +97,7 @@ const ProductDetail = () => {
           {/* Left: Gallery */}
           <div className="lg:col-span-7">
             <div className="aspect-square bg-sand-light rounded-2xl overflow-hidden mb-4">
-              <img src={galleryImages[selectedImage]} alt={product.name} className="w-full h-full object-cover" />
+              <img src={galleryImages[selectedImage]} alt={product.name} className="w-full h-full object-contain" />
             </div>
             <div className="grid grid-cols-4 gap-3">
               {galleryImages.map((img, i) => (
