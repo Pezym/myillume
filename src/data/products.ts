@@ -2,6 +2,7 @@ import toothbrushImg from '@/assets/toothbrush.png';
 import toothpasteImg from '@/assets/toothpaste-boxed.jpg';
 import kitFullImg from '@/assets/kit-full.jpg';
 import brushHeads3PackImg from '@/assets/brush-heads-3pack.jpg';
+import wandProductImg from '@/assets/wand-boxed.png';
 
 export interface Product {
   id: string;
@@ -57,14 +58,14 @@ export const products: Product[] = [
   },
   {
     id: 'whitening-wand',
-    name: 'LED Whitening Wand',
-    category: 'Accessories',
+    name: 'Extra-Strength Whitening Wands',
+    category: 'Oral Care',
     price: 39.99,
     originalPrice: 69.99,
     rating: 4.9,
     reviewCount: 72,
-    image: '/placeholder.svg',
-    description: 'Professional LED whitening technology in a portable wand.',
+    image: wandProductImg,
+    description: 'Dual whitening formula with hydrogen peroxide, carbomer, and glycerin for a gentle yet effective whitening experience.',
     badge: 'SAVE 43%',
   },
   {
@@ -78,18 +79,6 @@ export const products: Product[] = [
     image: brushHeads3PackImg,
     description: 'DuPont bristle replacement heads for your illumé toothbrush.',
     badge: 'SAVE 33%',
-  },
-  {
-    id: 'travel-case',
-    name: 'Premium Travel Case',
-    category: 'Accessories',
-    price: 24.99,
-    originalPrice: 39.99,
-    rating: 4.6,
-    reviewCount: 15,
-    image: '/placeholder.svg',
-    description: 'Hard-shell travel case with magnetic closure. Fits the full kit.',
-    badge: 'SAVE 38%',
   },
 ];
 
