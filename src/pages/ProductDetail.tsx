@@ -4,6 +4,7 @@ import { Star, ShoppingBag, Truck, RotateCcw, Shield, ChevronRight, Plus, Minus 
 import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import VideoTestimonials from '@/components/VideoTestimonials';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -241,6 +242,9 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* Video Testimonials */}
+      <VideoTestimonials />
 
       {/* Reviews */}
       <section className="max-w-7xl mx-auto px-6 py-12">
