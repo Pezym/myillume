@@ -1,17 +1,21 @@
 
 
-# Plan: Scroll-to-Top on Nav Clicks & Enlarge Hero Toothbrush
+# Plan: Add Ambassador Background Image to Hero
+
+## What We're Doing
+
+Add the uploaded lifestyle photo as a subtle, semi-transparent background image behind the hero section, giving it an ambassador/banner feel while keeping all text and UI elements fully readable.
 
 ## Changes
 
-### 1. Scroll to top when clicking Home or Shop nav links
-**File: `src/components/Navbar.tsx`**
-- Add `onClick={() => { window.scrollTo(0, 0); }}` to the desktop and mobile `<Link>` elements for Home and Shop
-- Also add it to the logo `<Link to="/">`
-- For mobile links, keep the existing `setMobileOpen(false)` in the handler
+### 1. Copy the uploaded image to assets
+- Copy `user-uploads://FE106372-BDF0-409A-AA33-5AB33295A48E.jpg` → `src/assets/hero-ambassador.jpg`
 
-### 2. Make the hero toothbrush ~2x bigger
-**File: `src/pages/Index.tsx` (line 102)**
-- Change the toothbrush image height from `h-[380px] md:h-[440px]` to `h-[700px] md:h-[800px]`
-- Add `max-h-full` and ensure the parent circle container clips overflow with `overflow-hidden` so the enlarged image stays within the circle boundary
+### 2. Update Hero Section in `src/pages/Index.tsx`
+- Import the new image
+- Add an absolutely-positioned `<img>` element inside the hero `<section>` that covers the full section
+- Apply low opacity (`opacity-[0.12]` or similar) so the model is subtly visible but doesn't compete with text
+- Use `object-cover object-top` to frame her face/upper body nicely
+- The existing `z-10` on the content grid already ensures text stays above the background layer
+- Add a subtle gradient overlay on top of the image to further ensure readability on the left (text) side
 
