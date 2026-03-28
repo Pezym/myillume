@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Star, ShoppingBag, Truck, RotateCcw, Shield, ChevronRight, Plus, Minus } from 'lucide-react';
+import modelBrushing from '@/assets/model-brushing.jpg';
+import kitFull from '@/assets/kit-full.jpg';
+import kitBox from '@/assets/kit-box.jpg';
+import toothbrushImg from '@/assets/toothbrush.png';
 import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
