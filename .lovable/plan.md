@@ -1,27 +1,20 @@
 
 
-# Plan: Multiple PDP & Homepage Fixes
+# Plan: Pin 3-in-1 Kit Above Product Carousel
+
+## What We're Doing
+
+Restore the original two-part layout: a static, always-visible 3-in-1 kit card pinned at the top, with the remaining products in an auto-scrolling carousel below it. This ensures the kit never gets lost in the carousel rotation.
 
 ## Changes
 
-### 1. Remove Subscribe & Save for the 3-in-1 Kit (`src/pages/ProductDetail.tsx`)
-- Remove the subscription option from `src/data/products.ts` by deleting the `'3-in-1-oral-kit'` entry from `subscribePricing`
-- On the PDP, the "Choose Your Offer" subscribe/one-time toggle will no longer appear for the kit since `hasSubscription` will be false
-- Default `purchaseType` to `'one-time'` when no subscription exists
+### File: `src/pages/Index.tsx` (lines 208-230)
 
-### 2. Add "Comes with 3 heads" to kit description (`src/data/products.ts`)
-- Update the kit's `description` or `productBullets` to mention "Comes with 3 brush heads"
+Replace the single all-products carousel with:
 
-### 3. Remove 2nd image (kit-full) from kit gallery (`src/pages/ProductDetail.tsx`, line 30)
-- Change gallery from `[kitAngle1, kitFull, kitAngle2, kitAngle3, modelBrushing, kitBox]` to `[kitAngle1, kitAngle2, kitAngle3, modelBrushing, kitBox]`
+1. **Pinned 3-in-1 Kit Card** — A static, prominent product card (not inside any carousel) linking to the kit PDP. Full-width on mobile, half-width on desktop. Shows image, name, price, rating, badge.
 
-### 4. Fix "You May Also Like" product images (`src/pages/ProductDetail.tsx`, lines 413-414)
-- Change `className="w-1/3 h-1/3 object-contain opacity-30"` to `className="w-full h-full object-contain p-6"` — removes the opacity filter and makes images fill the card
+2. **Carousel of remaining products** — Filter out the kit (`products.filter(p => p.id !== '3-in-1-oral-kit')`), display the rest in the existing auto-scrolling Embla carousel with `basis-1/2 md:basis-1/4` sizing.
 
-### 5. Remove 3-in-1 Oral Care system box from homepage (`src/pages/Index.tsx`, lines 219-244)
-- Remove the featured kit hero card (the large `kitProduct` block) from the product showcase section, keeping only the rolling carousel of all products (including the kit in the carousel)
-
-### 6. Fix CBS video glitching (`src/pages/Index.tsx`, lines 278-285)
-- Add `preload="auto"` and an `onError` handler with retry logic to the video element
-- Wrap in a container with a fallback/loading state so the section doesn't flash empty
+This is the same pattern from the earlier approved plan, now permanently locked in.
 
