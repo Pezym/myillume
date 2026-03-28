@@ -215,38 +215,10 @@ const Index = () => {
             </Link>
           </div>
 
-          {/* Featured 3-in-1 Kit */}
-          {(() => {
-            const kitProduct = products.find(p => p.id === '3-in-1-oral-kit');
-            if (!kitProduct) return null;
-            return (
-              <Link to={`/product/${kitProduct.id}`} className="group block mb-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-card border border-border rounded-2xl overflow-hidden">
-                  <div className="aspect-[4/3] md:aspect-auto bg-sand-light/30 overflow-hidden">
-                    <img src={kitProduct.image} alt={kitProduct.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6 md:p-10 flex flex-col justify-center">
-                    <span className="inline-block w-fit bg-foreground text-background text-[10px] font-body tracking-wider uppercase px-2.5 py-1 rounded-full mb-4">Best seller</span>
-                    <h3 className="font-display text-xl md:text-2xl mb-2">{kitProduct.name}</h3>
-                    <p className="font-body text-sm text-muted-foreground mb-4 max-w-md">{kitProduct.description}</p>
-                    <p className="font-body text-lg font-medium mb-1">Starting at ${kitProduct.price.toFixed(2)} <span className="text-sm text-muted-foreground line-through ml-2">${kitProduct.originalPrice.toFixed(2)}</span></p>
-                    <div className="flex items-center gap-1.5 mb-6">
-                      <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className={`w-3.5 h-3.5 ${i < Math.floor(kitProduct.rating) ? 'fill-foreground text-foreground' : 'text-muted-foreground/30'}`} />)}</div>
-                      <span className="text-xs text-muted-foreground font-body">{kitProduct.rating} ({kitProduct.reviewCount})</span>
-                    </div>
-                    <span className="inline-flex items-center gap-2 font-body text-sm tracking-wider group-hover:gap-3 transition-all">
-                      Shop Now <ArrowRight size={15} />
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            );
-          })()}
-
-          {/* Rolling carousel of other products */}
+          {/* Rolling carousel of all products */}
           <Carousel opts={{ align: 'start', loop: true }} plugins={[Autoplay({ delay: 3000, stopOnInteraction: false })]} className="w-full">
             <CarouselContent className="-ml-4">
-              {products.filter(p => p.id !== '3-in-1-oral-kit').map((product) => (
+              {products.map((product) => (
                 <CarouselItem key={product.id} className="pl-4 basis-1/2 md:basis-1/4">
                   <Link to={`/product/${product.id}`} className="group block">
                     <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-muted mb-3">
@@ -281,6 +253,11 @@ const Index = () => {
                 muted
                 loop
                 playsInline
+                preload="auto"
+                onError={(e) => {
+                  const video = e.currentTarget;
+                  setTimeout(() => { video.load(); video.play().catch(() => {}); }, 1000);
+                }}
                 className="w-full h-auto rounded-2xl"
               />
             </div>

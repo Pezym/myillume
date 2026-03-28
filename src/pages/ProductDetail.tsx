@@ -27,7 +27,7 @@ import VideoTestimonials from '@/components/VideoTestimonials';
 import ReviewShowcase from '@/components/ReviewShowcase';
 
 const productGalleries: Record<string, string[]> = {
-  '3-in-1-oral-kit': [kitAngle1, kitFull, kitAngle2, kitAngle3, modelBrushing, kitBox],
+  '3-in-1-oral-kit': [kitAngle1, kitAngle2, kitAngle3, modelBrushing, kitBox],
   'purple-toothpaste': [toothpasteImg, toothpasteModel, toothpasteTrio],
   'whitening-strips': [stripsBox, stripsModel, stripsSide, stripsProduct],
   'whitening-wand': [wandBoxed, wandProduct, wandClosed, wandBack],
@@ -60,7 +60,7 @@ const ProductDetail = () => {
 
   const [selectedPack, setSelectedPack] = useState('full-kit');
   const [selectedBundle, setSelectedBundle] = useState(1);
-  const [purchaseType, setPurchaseType] = useState<'subscribe' | 'one-time'>('subscribe');
+  const [purchaseType, setPurchaseType] = useState<'subscribe' | 'one-time'>(subscribePricing[product?.id] ? 'subscribe' : 'one-time');
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
 
@@ -74,7 +74,7 @@ const ProductDetail = () => {
   const features = productFeatures[product.id] || [];
   const faqs = productFaqs[product.id] || [];
 
-  useEffect(() => { setSelectedImage(0); setSelectedBundle(1); setPurchaseType('subscribe'); window.scrollTo(0, 0); }, [product.id]);
+  useEffect(() => { setSelectedImage(0); setSelectedBundle(1); setPurchaseType(subscribePricing[product.id] ? 'subscribe' : 'one-time'); window.scrollTo(0, 0); }, [product.id]);
 
   const currentBundle = bundles.find(b => b.qty === selectedBundle) || bundles[0];
 
@@ -411,7 +411,7 @@ const ProductDetail = () => {
           {products.filter(p => p.id !== product.id).slice(0, 3).map(p => (
             <Link key={p.id} to={`/product/${p.id}`} className="group bg-background border border-border rounded-2xl overflow-hidden hover:shadow-lg transition-all">
               <div className="aspect-square bg-sand-light flex items-center justify-center">
-                <img src={p.image} alt={p.name} className="w-1/3 h-1/3 object-contain opacity-30" />
+                <img src={p.image} alt={p.name} className="w-full h-full object-contain p-6" />
               </div>
               <div className="p-5">
                 <h3 className="font-display text-base mb-1 group-hover:text-sand transition-colors">{p.name}</h3>
