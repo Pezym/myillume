@@ -136,7 +136,7 @@ const Shop = () => {
                     name: bundle.label,
                     price: bundle.price,
                     originalPrice: bundle.originalPrice,
-                    image: '/placeholder.svg',
+                    image: toothbrushImg,
                     variant: `${bundle.qty}x 3-in-1 Kit`,
                   })}
                   className="w-full bg-sand text-primary font-body text-xs tracking-widest uppercase py-3 rounded-full hover:bg-gold transition-colors"
