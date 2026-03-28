@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import VideoTestimonials from '@/components/VideoTestimonials';
+import ReviewShowcase from '@/components/ReviewShowcase';
+import ComparisonChart from '@/components/ComparisonChart';
 import { Star, ArrowRight, ChevronRight, Droplets, Zap } from 'lucide-react';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import toothbrushImg from '@/assets/toothbrush.png';
@@ -8,6 +10,7 @@ import lifestyleClose from '@/assets/lifestyle-brushing-close.jpg';
 import kitFullImg from '@/assets/kit-full.jpg';
 import toothpasteBottle from '@/assets/toothpaste-bottle.jpg';
 import brushHeadsImg from '@/assets/brush-heads-close.jpg';
+import cbsVideo from '@/assets/cbs-feature.mov';
 
 const Index = () => {
   return (
@@ -24,8 +27,8 @@ const Index = () => {
             </div>
 
             <h1 className="font-display text-[3.5rem] md:text-[4.5rem] lg:text-[5.2rem] leading-[1.02] tracking-tight mb-6">
-              A smarter smile<br />starts with<br />
-              <em className="text-sand">illumé.</em>
+              Reinvent the Way<br />you Brush with<br />
+              <em className="text-sand">Illumé.</em>
             </h1>
 
             <p className="font-body text-base md:text-lg text-muted-foreground max-w-sm mb-10 leading-relaxed">
@@ -91,12 +94,12 @@ const Index = () => {
                 );
               })}
 
-              {/* Dark product card */}
-              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] md:w-[240px] bg-foreground rounded-3xl p-6 flex items-center justify-center shadow-2xl" style={{ height: '320px' }}>
+              {/* Product image — no background */}
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                 <img
                   src={toothbrushImg}
                   alt="illumé 3-in-1 Toothbrush"
-                  className="w-auto h-[280px] object-contain drop-shadow-[0_0_30px_rgba(200,184,154,0.3)]"
+                  className="w-auto h-[380px] md:h-[440px] object-contain drop-shadow-[0_0_40px_rgba(200,184,154,0.35)]"
                 />
               </div>
 
@@ -133,10 +136,22 @@ const Index = () => {
       <section className="py-10 border-y border-border">
         <div className="max-w-7xl mx-auto px-6">
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground text-center mb-6">As Seen On</p>
-          <div className="flex items-center justify-center gap-12 flex-wrap">
-            {['CBS News', 'Forbes', 'TechCrunch', 'Vogue', 'GQ'].map(name => (
-              <span key={name} className="font-display text-lg italic text-muted-foreground/40 tracking-wide">{name}</span>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="rounded-2xl overflow-hidden">
+              <video
+                src={cbsVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-auto rounded-2xl"
+              />
+            </div>
+            <div className="flex items-center justify-center gap-12 flex-wrap">
+              {['CBS News', 'Forbes', 'TechCrunch', 'Vogue', 'GQ'].map(name => (
+                <span key={name} className="font-display text-lg italic text-muted-foreground/40 tracking-wide">{name}</span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -226,7 +241,7 @@ const Index = () => {
       <section className="py-20 bg-foreground text-background">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {[
-            { value: '106+', label: 'Verified Reviews' },
+            { value: '75k+', label: 'Verified Reviews' },
             { value: '4.9★', label: 'Average Rating' },
             { value: '3-in-1', label: 'Patented Design' },
             { value: '60 Day', label: 'Smile Guarantee' },
@@ -245,29 +260,7 @@ const Index = () => {
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground text-center mb-3">Reviews</p>
           <h2 className="font-display text-3xl md:text-4xl text-center mb-4">What Our Customers Say</h2>
           <p className="font-body text-sm text-muted-foreground text-center mb-14">Real reviews from real smiles.</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { name: 'Sarah M.', quote: 'I\'ve never had my teeth feel this clean after brushing at home. The water flosser is a game changer!', rating: 5 },
-              { name: 'James K.', quote: 'Replaced my toothbrush, water flosser, AND tongue scraper. One device. Incredible.', rating: 5 },
-              { name: 'Emily R.', quote: 'My dentist noticed the difference at my last cleaning. That says everything.', rating: 5 },
-            ].map((review, i) => (
-              <div key={i} className="bg-background border border-border p-8 rounded-3xl">
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: review.rating }).map((_, j) => (
-                    <Star key={j} size={14} className="fill-gold text-gold" />
-                  ))}
-                </div>
-                <p className="font-body text-sm leading-relaxed mb-8 text-muted-foreground">"{review.quote}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-sand to-gold" />
-                  <div>
-                    <p className="font-body text-sm font-medium">{review.name}</p>
-                    <p className="font-body text-[11px] text-muted-foreground">Verified Buyer</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReviewShowcase />
           <div className="mt-16">
             <VideoTestimonials />
           </div>
