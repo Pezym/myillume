@@ -3,6 +3,7 @@ import toothpasteImg from '@/assets/toothpaste-boxed.jpg';
 import kitFullImg from '@/assets/kit-full.jpg';
 import brushHeads3PackImg from '@/assets/brush-heads-3pack.jpg';
 import wandProductImg from '@/assets/wand-boxed.png';
+import stripsBoxImg from '@/assets/strips-box.png';
 
 export interface Product {
   id: string;
@@ -52,7 +53,7 @@ export const products: Product[] = [
     originalPrice: 49.99,
     rating: 4.7,
     reviewCount: 38,
-    image: '/placeholder.svg',
+    image: stripsBoxImg,
     description: 'Dentist-grade whitening strips for professional results at home.',
     badge: 'SAVE 40%',
   },
