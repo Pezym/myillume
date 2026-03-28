@@ -3,6 +3,8 @@ import VideoTestimonials from '@/components/VideoTestimonials';
 import ReviewShowcase from '@/components/ReviewShowcase';
 import ComparisonChart from '@/components/ComparisonChart';
 import { Star, ArrowRight, ChevronRight, Droplets, Zap } from 'lucide-react';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 import { products } from '@/data/products';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import toothbrushImg from '@/assets/toothbrush.png';
@@ -196,43 +198,70 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Mobile — Quip-style 2-column product grid */}
-          <div className="md:hidden mt-8 px-1">
-            {/* Header row */}
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="font-heading text-lg font-semibold">Reinvent Your Routine</h2>
-              <Link to="/shop" className="font-body text-xs text-primary underline underline-offset-2" onClick={() => window.scrollTo(0, 0)}>
-                Shop bestsellers
-              </Link>
-            </div>
-            {/* 2-column grid */}
-            <div className="grid grid-cols-2 gap-3">
-              {products.map((product) => (
-                <Link
-                  key={product.id}
-                  to={`/product/${product.id}`}
-                  className="bg-card border border-border rounded-2xl overflow-hidden hover:shadow-md transition-shadow"
-                >
-                  <div className="aspect-[3/4] bg-sand-light relative">
-                    <img src={product.image} alt={product.name} className="w-full h-full object-cover" />
-                    {product.id === '3-in-1-oral-kit' && (
-                      <span className="absolute top-2 left-2 bg-primary text-primary-foreground font-body text-[10px] font-semibold tracking-wide uppercase px-2 py-0.5 rounded-full">
-                        Best seller
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-3">
-                    <p className="font-body text-xs font-medium leading-tight line-clamp-2 mb-1">{product.name}</p>
-                    <p className="font-body text-xs text-muted-foreground mb-1">Starting at ${product.price.toFixed(2)}</p>
-                    <div className="flex items-center gap-1">
-                      <span className="text-gold text-[10px]">★★★★★</span>
-                      <span className="font-body text-[10px] text-muted-foreground">{product.rating} ({product.reviewCount})</span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+        </div>
+      </section>
+
+      {/* Unified Product Showcase */}
+      <section className="py-12 md:py-16 bg-background">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between mb-8 md:mb-10">
+            <h2 className="font-display text-2xl md:text-3xl">Reinvent Your Routine</h2>
+            <Link to="/shop" className="font-body text-xs md:text-sm text-muted-foreground hover:text-foreground flex items-center gap-1 transition-colors" onClick={() => window.scrollTo(0, 0)}>
+              Shop bestsellers <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
+
+          {/* Featured 3-in-1 Kit */}
+          {(() => {
+            const kitProduct = products.find(p => p.id === '3-in-1-oral-kit');
+            if (!kitProduct) return null;
+            return (
+              <Link to={`/product/${kitProduct.id}`} className="group block mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-card border border-border rounded-2xl overflow-hidden">
+                  <div className="aspect-[4/3] md:aspect-auto bg-sand-light/30 overflow-hidden">
+                    <img src={kitProduct.image} alt={kitProduct.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                  <div className="p-6 md:p-10 flex flex-col justify-center">
+                    <span className="inline-block w-fit bg-foreground text-background text-[10px] font-body tracking-wider uppercase px-2.5 py-1 rounded-full mb-4">Best seller</span>
+                    <h3 className="font-display text-xl md:text-2xl mb-2">{kitProduct.name}</h3>
+                    <p className="font-body text-sm text-muted-foreground mb-4 max-w-md">{kitProduct.description}</p>
+                    <p className="font-body text-lg font-medium mb-1">Starting at ${kitProduct.price.toFixed(2)} <span className="text-sm text-muted-foreground line-through ml-2">${kitProduct.originalPrice.toFixed(2)}</span></p>
+                    <div className="flex items-center gap-1.5 mb-6">
+                      <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className={`w-3.5 h-3.5 ${i < Math.floor(kitProduct.rating) ? 'fill-foreground text-foreground' : 'text-muted-foreground/30'}`} />)}</div>
+                      <span className="text-xs text-muted-foreground font-body">{kitProduct.rating} ({kitProduct.reviewCount})</span>
+                    </div>
+                    <span className="inline-flex items-center gap-2 font-body text-sm tracking-wider group-hover:gap-3 transition-all">
+                      Shop Now <ArrowRight size={15} />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            );
+          })()}
+
+          {/* Rolling carousel of other products */}
+          <Carousel opts={{ align: 'start', loop: true }} plugins={[Autoplay({ delay: 3000, stopOnInteraction: false })]} className="w-full">
+            <CarouselContent className="-ml-4">
+              {products.filter(p => p.id !== '3-in-1-oral-kit').map((product) => (
+                <CarouselItem key={product.id} className="pl-4 basis-1/2 md:basis-1/4">
+                  <Link to={`/product/${product.id}`} className="group block">
+                    <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-muted mb-3">
+                      <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                      {product.badge && (
+                        <span className="absolute top-2 left-2 bg-foreground text-background text-[10px] font-body tracking-wider uppercase px-2 py-0.5 rounded-full">{product.badge}</span>
+                      )}
+                    </div>
+                    <h3 className="font-body text-xs md:text-sm font-medium leading-tight mb-1 line-clamp-2">{product.name}</h3>
+                    <p className="font-body text-xs md:text-sm text-muted-foreground">Starting at ${product.price.toFixed(2)}</p>
+                    <div className="flex items-center gap-1 mt-1">
+                      <div className="flex">{[...Array(5)].map((_, i) => <Star key={i} className={`w-3 h-3 ${i < Math.floor(product.rating) ? 'fill-foreground text-foreground' : 'text-muted-foreground/30'}`} />)}</div>
+                      <span className="text-[10px] md:text-[11px] text-muted-foreground font-body">{product.rating} ({product.reviewCount})</span>
+                    </div>
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
         </div>
       </section>
 
