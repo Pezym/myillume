@@ -3,7 +3,6 @@ import { Star, ArrowRight, ChevronRight, Droplets, Zap } from 'lucide-react';
 import toothbrushImg from '@/assets/toothbrush.png';
 import lifestyleSmile from '@/assets/lifestyle-brushing-smile.jpg';
 import lifestyleClose from '@/assets/lifestyle-brushing-close.jpg';
-import lifestyleToothpaste from '@/assets/lifestyle-toothpaste.jpg';
 
 const Index = () => {
   return (
@@ -143,7 +142,7 @@ const Index = () => {
           {[
             { title: 'Brush.', desc: '360° sonic oscillation at 40,000 strokes/min. Every surface, every angle — the deepest clean without the dentist chair.', align: 'left', image: lifestyleSmile },
             { title: 'Floss.', desc: 'Built-in water flosser removes 60% more plaque between teeth than brushing alone. No more excuses.', align: 'right', image: lifestyleClose },
-            { title: 'Scrape.', desc: 'Eliminate the #1 source of bad breath. The integrated tongue scraper swaps on in seconds for a truly complete routine.', align: 'left', image: lifestyleToothpaste },
+            { title: 'Scrape.', desc: 'Eliminate the #1 source of bad breath. The integrated tongue scraper swaps on in seconds for a truly complete routine.', align: 'left', image: null },
           ].map((feature, i) => (
             <div key={i} className={`grid grid-cols-1 md:grid-cols-2 gap-16 items-center`}>
               <div className={`${feature.align === 'right' ? 'md:order-2' : ''}`}>
@@ -151,8 +150,8 @@ const Index = () => {
                 <h2 className="font-display text-5xl md:text-7xl mb-5">{feature.title}</h2>
                 <p className="font-body text-base text-muted-foreground max-w-md leading-relaxed">{feature.desc}</p>
               </div>
-              <div className={`aspect-[4/3] rounded-3xl overflow-hidden ${feature.align === 'right' ? 'md:order-1' : ''}`}>
-                <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
+              <div className={`aspect-[4/3] rounded-3xl overflow-hidden ${feature.align === 'right' ? 'md:order-1' : ''} ${!feature.image ? 'bg-gradient-to-br from-sand-light to-sand/20' : ''}`}>
+                {feature.image && <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />}
               </div>
             </div>
           ))}
