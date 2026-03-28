@@ -17,7 +17,7 @@ const Navbar = () => {
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
         {/* Logo */}
-        <Link to="/" className="font-display italic text-2xl tracking-tight text-foreground">
+        <Link to="/" onClick={() => window.scrollTo(0, 0)} className="font-display italic text-2xl tracking-tight text-foreground">
           illumé<span className="text-sand ml-0.5">.</span>
         </Link>
 
@@ -29,7 +29,7 @@ const Navbar = () => {
                 {link.label}
               </a>
             ) : (
-              <Link key={link.label} to={link.to} className="font-body text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors">
+              <Link key={link.label} to={link.to} onClick={() => window.scrollTo(0, 0)} className="font-body text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors">
                 {link.label}
               </Link>
             )
@@ -78,7 +78,7 @@ const Navbar = () => {
                 {link.label}
               </a>
             ) : (
-              <Link key={link.label} to={link.to} onClick={() => setMobileOpen(false)} className="block font-body text-sm tracking-wide text-foreground py-2">
+              <Link key={link.label} to={link.to} onClick={() => { setMobileOpen(false); window.scrollTo(0, 0); }} className="block font-body text-sm tracking-wide text-foreground py-2">
                 {link.label}
               </Link>
             )
