@@ -50,7 +50,7 @@ const Shop = () => {
       {featured && (
         <section className="max-w-7xl mx-auto px-6 pb-10">
           <div className="group relative grid grid-cols-1 md:grid-cols-2 bg-sand-light/30 rounded-3xl overflow-hidden border border-border hover:shadow-xl transition-shadow duration-300">
-            <Link to={`/product/${featured.id}`} className="aspect-square md:aspect-auto overflow-hidden">
+            <Link to={`/product/${featured.id}`} className="aspect-square md:aspect-auto overflow-hidden bg-white">
               <img
                 src={featured.image}
                 alt={featured.name}
