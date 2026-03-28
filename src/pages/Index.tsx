@@ -16,7 +16,7 @@ import kitFullImg from '@/assets/kit-full.jpg';
 import toothpasteBottle from '@/assets/toothpaste-bottle.jpg';
 import brushHeadsImg from '@/assets/brush-heads-close.jpg';
 import cbsVideo from '@/assets/cbs-feature.mov';
-import heroAmbassador from '@/assets/hero-ambassador.jpg';
+import heroAmbassador from '@/assets/model-brushing.jpg';
 
 const Index = () => {
   const [quizOpen, setQuizOpen] = useState(false);
