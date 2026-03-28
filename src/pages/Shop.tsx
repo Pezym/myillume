@@ -14,6 +14,10 @@ const Shop = () => {
 
   const filtered = activeFilter === 'All' ? products : products.filter(p => p.category === activeFilter);
 
+  // Split into featured (first) and rest
+  const featured = filtered.find(p => p.featured);
+  const rest = filtered.filter(p => p !== featured);
+
   return (
     <div>
       {/* Shop Hero */}
@@ -39,38 +43,76 @@ const Shop = () => {
       </section>
 
       {/* Filter Bar */}
-      <section id="products" className="max-w-7xl mx-auto px-6 pt-14 pb-6">
-        <div className="flex items-center justify-between flex-wrap gap-4 mb-2">
+      <section id="products" className="max-w-7xl mx-auto px-6 pt-14 pb-8">
+        <div className="flex items-center justify-between flex-wrap gap-4">
           <h2 className="font-display text-2xl">Our Products</h2>
-          <div className="flex items-center gap-6">
-            <div className="flex gap-2">
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveFilter(cat)}
-                  className={`font-body text-[11px] tracking-widest uppercase px-5 py-2 rounded-full transition-colors ${
-                    activeFilter === cat
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-            <p className="font-body text-xs text-muted-foreground hidden sm:block">{filtered.length} products</p>
+          <div className="flex items-center gap-3">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={`font-body text-[11px] tracking-widest uppercase px-5 py-2 rounded-full transition-all duration-200 ${
+                  activeFilter === cat
+                    ? 'bg-primary text-primary-foreground'
+                    : 'text-muted-foreground hover:text-foreground hover:bg-sand-light/60'
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
-        <div className="w-full h-px bg-border" />
       </section>
 
-      {/* Product Grid */}
-      <section className="max-w-7xl mx-auto px-6 pb-20">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-10">
-          {filtered.map((product) => (
+      {/* Featured Product — Full-width card */}
+      {featured && (
+        <section className="max-w-7xl mx-auto px-6 pb-10">
+          <div className="group relative grid grid-cols-1 md:grid-cols-2 bg-sand-light/30 rounded-3xl overflow-hidden border border-border hover:shadow-xl transition-shadow duration-300">
+            <Link to={`/product/${featured.id}`} className="aspect-[4/3] md:aspect-auto overflow-hidden">
+              <img
+                src={featured.image}
+                alt={featured.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+            </Link>
+            <div className="flex flex-col justify-center p-8 md:p-12">
+              {featured.badge && (
+                <span className="self-start bg-primary text-primary-foreground font-body text-[9px] tracking-widest uppercase px-3 py-1 rounded-full mb-4">
+                  {featured.badge}
+                </span>
+              )}
+              <Link to={`/product/${featured.id}`}>
+                <h3 className="font-display text-2xl md:text-3xl mb-3 group-hover:text-sand transition-colors">{featured.name}</h3>
+              </Link>
+              <p className="font-body text-sm text-muted-foreground leading-relaxed mb-5 max-w-md">{featured.description}</p>
+              <div className="flex items-center gap-1 mb-4">
+                {Array.from({ length: 5 }).map((_, j) => (
+                  <Star key={j} size={13} className={j < Math.floor(featured.rating) ? 'fill-gold text-gold' : 'text-border'} />
+                ))}
+                <span className="font-body text-xs text-muted-foreground ml-1">({featured.reviewCount} reviews)</span>
+              </div>
+              <div className="flex items-center gap-3 mb-6">
+                <span className="font-price text-2xl font-bold">${featured.price}</span>
+                <span className="font-price text-base text-muted-foreground line-through">${featured.originalPrice}</span>
+              </div>
+              <button
+                onClick={() => addItem({ id: featured.id, name: featured.name, price: featured.price, originalPrice: featured.originalPrice, image: featured.image })}
+                className="self-start flex items-center gap-2 bg-primary text-primary-foreground font-body text-xs tracking-widest uppercase px-8 py-3.5 rounded-full hover:bg-sand hover:text-primary transition-colors"
+              >
+                <ShoppingBag size={14} /> Add to Cart
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Product Grid — remaining products */}
+      <section className="max-w-7xl mx-auto px-6 pb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-5 gap-y-12">
+          {rest.map((product) => (
             <div key={product.id} className="group">
               <Link to={`/product/${product.id}`}>
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-sand-light/30 mb-4">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-sand-light/20 mb-4">
                   <img
                     src={product.image}
                     alt={product.name}
@@ -81,9 +123,21 @@ const Shop = () => {
                       {product.badge}
                     </span>
                   )}
+                  {/* Quick-add overlay */}
+                  <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        addItem({ id: product.id, name: product.name, price: product.price, originalPrice: product.originalPrice, image: product.image });
+                      }}
+                      className="w-full flex items-center justify-center gap-2 bg-primary/95 backdrop-blur text-primary-foreground font-body text-[10px] tracking-widest uppercase py-3 rounded-full hover:bg-sand hover:text-primary transition-colors"
+                    >
+                      <ShoppingBag size={12} /> Quick Add
+                    </button>
+                  </div>
                 </div>
               </Link>
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 <Link to={`/product/${product.id}`}>
                   <h3 className="font-display text-sm group-hover:text-sand transition-colors">{product.name}</h3>
                 </Link>
@@ -97,12 +151,6 @@ const Shop = () => {
                   <span className="font-price text-base font-semibold">${product.price}</span>
                   <span className="font-price text-xs text-muted-foreground line-through">${product.originalPrice}</span>
                 </div>
-                <button
-                  onClick={() => addItem({ id: product.id, name: product.name, price: product.price, originalPrice: product.originalPrice, image: product.image })}
-                  className="mt-2 w-full flex items-center justify-center gap-2 border border-foreground text-foreground font-body text-[10px] tracking-widest uppercase py-2.5 rounded-full hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors"
-                >
-                  <ShoppingBag size={12} /> Add to Cart
-                </button>
               </div>
             </div>
           ))}
