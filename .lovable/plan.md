@@ -1,41 +1,32 @@
 
 
-# Plan: Multiple UI Updates
+# Plan: Quip-Style Mobile Product Showcase
+
+## What We're Doing
+
+Redesigning the mobile homepage product section to match the Quip-style layout from the reference screenshots: a 2-column product grid with large product cards, "Best seller" badges, star ratings, review counts, and a section header with a "Shop bestsellers" link — replacing the current small static card + marquee carousel.
 
 ## Changes
 
-### 1. Mobile hero carousel: 3-in-1 kit static above, rest in carousel
-**File: `src/pages/Index.tsx` (lines 135-152)**
-- Find the 3-in-1 oral kit product and render it as a static, prominent card above the carousel (linked to its product page)
-- Filter it out of the auto-scrolling carousel so only the other products scroll
+### File: `src/pages/Index.tsx` (lines 135-175)
 
-### 2. Replace hero background image
-- Copy `user-uploads://hero_2.webp` → `src/assets/hero-ambassador.jpg` (overwrite)
-- Update opacity from `opacity-[0.12]` to `opacity-[0.18]` for more visibility
-- Adjust the gradient overlay to be slightly less aggressive (`via-background/70` instead of `/80`)
+**Replace the current mobile hero product section** (static kit card + auto-scrolling marquee) with:
 
-### 3. Remove mobile toothbrush circle entirely
-**File: `src/pages/Index.tsx` (lines 180-218)**
-- Delete the entire `md:hidden` section that renders the toothbrush circle with floating badges below "As Seen On"
+1. **Section header row**: Left-aligned "Reinvent Your Routine" heading + right-aligned "Shop bestsellers" link (matches Quip's "Refresh your routine / Shop bestsellers" layout)
 
-### 4. Remove toothpaste image from "Facts Backed by Science"
-**File: `src/pages/Index.tsx` (lines 267-269)**
-- Remove the right-column image (`toothpasteBottle`) from the Facts section
-- Make the left column full-width (`md:grid-cols-1` or remove grid, center content)
+2. **2-column product grid**: All products displayed in a `grid grid-cols-2 gap-3` layout with:
+   - Tall product cards (`aspect-[3/4]` image area) with rounded corners and light background
+   - "Best seller" badge on the kit product (small green/sand pill)
+   - Product name below the image
+   - "Starting at $XX.00" pricing format
+   - Star rating row (e.g., ★★★★★ 4.8 (75k+))
+   - Each card links to its product page
 
-### 5. Shop header: "Our Products" → "Reinvent Your Routine"
-**File: `src/pages/Shop.tsx` (line 30)**
-- Change text
+3. **Horizontal scroll option**: If more than 4 products, the grid scrolls or wraps naturally. For now with 4 products, a clean 2×2 grid.
 
-### 6. ReviewShowcase: Remove "The Last Toothbrush" heading, make reviews auto-carousel
-**File: `src/components/ReviewShowcase.tsx`**
-- Remove the "The Last Toothbrush You'll Ever Need" heading and rating line (lines 27-37)
-- Add Embla autoplay plugin for auto-scrolling: `import Autoplay from 'embla-carousel-autoplay'` and pass `[Autoplay({ delay: 3000, stopOnInteraction: false })]` to `useEmblaCarousel`
-- This affects both homepage and product page usage since they share the component
+This section remains `md:hidden` — desktop layout is unchanged.
 
-### Files Modified
-- `src/pages/Index.tsx` — hero carousel split, remove mobile toothbrush circle, remove facts image
-- `src/pages/Shop.tsx` — heading text
-- `src/components/ReviewShowcase.tsx` — remove heading, add autoplay
-- `src/assets/hero-ambassador.jpg` — replaced with new image
+### Summary
+- Desktop: no changes
+- Mobile hero: replaces marquee + static card with a polished 2-column product grid inspired by Quip's layout
 
