@@ -25,15 +25,17 @@ const Navbar = () => {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          {links.map(link => (
-            <Link
-              key={link.label}
-              to={link.to}
-              className="font-body text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map(link =>
+            link.external ? (
+              <a key={link.label} href={link.to} target="_blank" rel="noopener noreferrer" className="font-body text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors">
+                {link.label}
+              </a>
+            ) : (
+              <Link key={link.label} to={link.to} className="font-body text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors">
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Right side */}
