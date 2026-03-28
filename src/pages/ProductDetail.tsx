@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Star, ShoppingBag, Truck, RotateCcw, Shield, ChevronRight, Plus, Minus } from 'lucide-react';
+import modelBrushing from '@/assets/model-brushing.jpg';
+import kitFull from '@/assets/kit-full.jpg';
+import kitBox from '@/assets/kit-box.jpg';
+import toothbrushImg from '@/assets/toothbrush.png';
 import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -14,6 +18,9 @@ const ProductDetail = () => {
   const [selectedPack, setSelectedPack] = useState('full-kit');
   const [selectedBundle, setSelectedBundle] = useState(1);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  const galleryImages = [kitFull, modelBrushing, toothbrushImg, kitBox];
 
   const currentBundle = bundlePricing.find(b => b.qty === selectedBundle) || bundlePricing[0];
 
@@ -67,12 +74,18 @@ const ProductDetail = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Left: Gallery */}
           <div className="lg:col-span-7">
-            <div className="aspect-square bg-sand-light rounded-2xl flex items-center justify-center mb-4">
-              <img src={product.image} alt={product.name} className="w-1/2 h-1/2 object-contain opacity-30" />
+            <div className="aspect-square bg-sand-light rounded-2xl overflow-hidden mb-4">
+              <img src={galleryImages[selectedImage]} alt={product.name} className="w-full h-full object-cover" />
             </div>
             <div className="grid grid-cols-4 gap-3">
-              {[1, 2, 3, 4].map(i => (
-                <div key={i} className="aspect-square bg-sand-light/70 rounded-lg cursor-pointer hover:ring-2 hover:ring-sand transition-all" />
+              {galleryImages.map((img, i) => (
+                <div
+                  key={i}
+                  onClick={() => setSelectedImage(i)}
+                  className={`aspect-square rounded-lg cursor-pointer overflow-hidden transition-all ${selectedImage === i ? 'ring-2 ring-sand' : 'opacity-70 hover:opacity-100'}`}
+                >
+                  <img src={img} alt={`View ${i + 1}`} className="w-full h-full object-cover" />
+                </div>
               ))}
             </div>
           </div>
