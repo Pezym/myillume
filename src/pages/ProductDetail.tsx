@@ -5,10 +5,28 @@ import modelBrushing from '@/assets/model-brushing.jpg';
 import kitFull from '@/assets/kit-full.jpg';
 import kitBox from '@/assets/kit-box.jpg';
 import toothbrushImg from '@/assets/toothbrush.png';
+import stripsBox from '@/assets/strips-box.png';
+import stripsModel from '@/assets/strips-model.png';
+import stripsSide from '@/assets/strips-side.png';
+import stripsProduct from '@/assets/strips-product.png';
+import wandBoxed from '@/assets/wand-boxed.png';
+import wandProduct from '@/assets/wand-product.png';
+import wandClosed from '@/assets/wand-closed.png';
+import wandBack from '@/assets/wand-back.png';
+import toothpasteImg from '@/assets/toothpaste-boxed.jpg';
+import brushHeads3Pack from '@/assets/brush-heads-3pack.jpg';
 import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import VideoTestimonials from '@/components/VideoTestimonials';
+
+const productGalleries: Record<string, string[]> = {
+  '3-in-1-oral-kit': [kitFull, modelBrushing, toothbrushImg, kitBox],
+  'purple-toothpaste': [toothpasteImg],
+  'whitening-strips': [stripsBox, stripsModel, stripsSide, stripsProduct],
+  'whitening-wand': [wandBoxed, wandProduct, wandClosed, wandBack],
+  'brush-heads-3pack': [brushHeads3Pack],
+};
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -20,7 +38,7 @@ const ProductDetail = () => {
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
 
-  const galleryImages = [kitFull, modelBrushing, toothbrushImg, kitBox];
+  const galleryImages = productGalleries[product.id] || [product.image];
 
   const currentBundle = bundlePricing.find(b => b.qty === selectedBundle) || bundlePricing[0];
 
