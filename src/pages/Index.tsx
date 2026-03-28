@@ -24,9 +24,9 @@ const Index = () => {
     <div>
       {/* Hero */}
       {/* Mobile: stacked layout — image on top, text below */}
-      <section className="md:hidden bg-background overflow-hidden">
+      <section className="md:hidden bg-background overflow-hidden px-4 pt-3">
         {/* Standalone hero image */}
-        <img src={heroAmbassador} alt="Illumé ambassador" className="w-full aspect-[4/3] object-cover object-[center_25%]" />
+        <img src={heroAmbassador} alt="Illumé ambassador" className="w-full aspect-[4/3] object-cover object-[center_25%] rounded-2xl" />
 
         {/* Text content below image */}
         <div className="px-6 pb-10 pt-8">
