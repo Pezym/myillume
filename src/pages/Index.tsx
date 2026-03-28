@@ -37,7 +37,7 @@ const Index = () => {
             </h1>
 
             <p className="font-body text-base md:text-lg text-muted-foreground max-w-sm mb-10 leading-relaxed">
-              The world's first toothbrush that brushes, flosses, and scrapes — on a single charge. Cleaner teeth, fresher breath, healthier gums.
+              Simplify your routine. Elevate your results.
             </p>
 
             <div className="flex items-center gap-5 mb-14">
