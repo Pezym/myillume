@@ -94,11 +94,11 @@ const Shop = () => {
           {rest.map((product) => (
             <div key={product.id} className="group">
               <Link to={`/product/${product.id}`}>
-                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-sand-light/20 mb-4">
+                <div className="relative aspect-[3/4] rounded-2xl overflow-hidden bg-white mb-4">
                   <img
                     src={product.image}
                     alt={product.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
                   {product.badge && (
                     <span className="absolute top-3 left-3 bg-primary text-primary-foreground font-body text-[9px] tracking-widest uppercase px-3 py-1 rounded-full">
