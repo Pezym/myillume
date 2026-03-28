@@ -18,13 +18,72 @@ const Index = () => {
   return (
     <div>
       {/* Hero */}
-      <section className="relative min-h-[92vh] flex items-center overflow-hidden bg-background">
-        {/* Ambassador background */}
-        <img src={heroAmbassador} alt="" className="absolute inset-0 w-full h-full object-cover object-top opacity-[0.18] pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 py-16">
-          {/* Left — Copy */}
+      {/* Mobile: stacked layout — image on top, text below */}
+      <section className="md:hidden bg-background">
+        <div className="w-full aspect-[4/3] overflow-hidden">
+          <img src={heroAmbassador} alt="Illumé ambassador" className="w-full h-full object-cover object-top" />
+        </div>
+        <div className="px-6 py-10">
           <div className="max-w-xl">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 border border-foreground/20 rounded-full px-4 py-1.5 mb-8">
+              <span className="font-body text-[10px] tracking-[0.2em] uppercase font-semibold border border-foreground/30 rounded px-1.5 py-0.5">3-IN-1</span>
+              <span className="font-body text-xs tracking-wide text-muted-foreground">Oral Care System</span>
+            </div>
+
+            <h1 className="font-display text-[3rem] leading-[1.02] tracking-tight mb-6">
+              Reinvent the Way<br />you Brush with<br />
+              <em className="text-sand">Illumé.</em>
+            </h1>
+
+            <p className="font-body text-base text-muted-foreground max-w-sm mb-10 leading-relaxed">
+              Simplify your routine. Elevate your results.
+            </p>
+
+            <div className="flex items-center gap-5 mb-10">
+              <Link
+                to="/shop"
+                className="inline-flex items-center gap-2 bg-foreground text-background font-body text-sm tracking-wider px-7 py-3.5 rounded-full hover:bg-ink-light transition-colors"
+              >
+                Shop illumé <ArrowRight size={15} />
+              </Link>
+              <Link
+                to="/product/3-in-1-oral-kit"
+                className="inline-flex items-center gap-1 font-body text-sm tracking-wider hover:gap-2 transition-all"
+              >
+                Take The Quiz <ArrowRight size={15} />
+              </Link>
+            </div>
+
+            {/* Stats bar */}
+            <div className="flex items-center gap-8 border-t border-border pt-6">
+              <div>
+                <p className="font-display text-2xl flex items-baseline gap-1">
+                  4.8<Star size={18} className="fill-gold text-gold inline -mt-1" />
+                </p>
+                <p className="font-body text-[10px] tracking-[0.15em] uppercase text-muted-foreground mt-0.5">75k+ Reviews</p>
+              </div>
+              <div className="w-px h-10 bg-border" />
+              <div>
+                <p className="font-display text-2xl">60d</p>
+                <p className="font-body text-[10px] tracking-[0.15em] uppercase text-muted-foreground mt-0.5">Battery Life</p>
+              </div>
+              <div className="w-px h-10 bg-border" />
+              <div>
+                <p className="font-display text-2xl">3-in-1</p>
+                <p className="font-body text-[10px] tracking-[0.15em] uppercase text-muted-foreground mt-0.5">Complete System</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Desktop hero: image as full background with frosted text card */}
+      <section className="relative min-h-[92vh] hidden md:flex items-center overflow-hidden bg-background">
+        <img src={heroAmbassador} alt="" className="absolute inset-0 w-full h-full object-cover object-top opacity-100 pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 py-16">
+          {/* Left — Copy with frosted backdrop */}
+          <div className="max-w-xl bg-background/80 backdrop-blur-sm rounded-2xl p-8">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 border border-foreground/20 rounded-full px-4 py-1.5 mb-8">
               <span className="font-body text-[10px] tracking-[0.2em] uppercase font-semibold border border-foreground/30 rounded px-1.5 py-0.5">3-IN-1</span>
