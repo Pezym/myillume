@@ -1,7 +1,7 @@
 const AnnouncementBar = () => {
   const messages = [
     'FREE SHIPPING ON ALL ORDERS',
-    'USE CODE VDAY15 FOR 15% OFF',
+    'USE CODE NEWSMILE FOR 15% OFF',
     'AS SEEN ON CBS NEWS',
     '60-DAY SMILE GUARANTEE',
   ];
