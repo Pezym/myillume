@@ -31,13 +31,26 @@ const Footer = () => {
           <div>
             <h4 className="font-body text-xs tracking-[0.2em] uppercase mb-4">Policies</h4>
             <ul className="space-y-2">
-              {['Privacy Policy', 'Refund Policy', 'Shipping Policy', 'Terms of Service'].map(item => (
-                <li key={item}>
-                  <a href="#" className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
-                    {item}
-                  </a>
-                </li>
-              ))}
+              <li>
+                <a href="#" className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <Link to="/refund-policy" onClick={() => window.scrollTo(0, 0)} className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
+                  Refund Policy
+                </Link>
+              </li>
+              <li>
+                <Link to="/shipping-policy" onClick={() => window.scrollTo(0, 0)} className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
+                  Shipping Policy
+                </Link>
+              </li>
+              <li>
+                <a href="#" className="font-body text-sm text-primary-foreground/60 hover:text-sand transition-colors">
+                  Terms of Service
+                </a>
+              </li>
             </ul>
           </div>
 
