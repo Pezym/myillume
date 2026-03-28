@@ -18,6 +18,9 @@ const ProductDetail = () => {
   const [selectedPack, setSelectedPack] = useState('full-kit');
   const [selectedBundle, setSelectedBundle] = useState(1);
   const [showStickyBar, setShowStickyBar] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(0);
+
+  const galleryImages = [kitFull, modelBrushing, toothbrushImg, kitBox];
 
   const currentBundle = bundlePricing.find(b => b.qty === selectedBundle) || bundlePricing[0];
 
