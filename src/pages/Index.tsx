@@ -78,12 +78,17 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Desktop hero: image as full background with frosted text card */}
+      {/* Desktop hero: half-and-half layout */}
       <section className="relative min-h-[92vh] hidden md:flex items-center overflow-hidden bg-background">
-        <img src={heroAmbassador} alt="" className="absolute inset-0 w-full h-full object-cover object-top opacity-100 pointer-events-none" />
+        {/* Right half — image */}
+        <div className="absolute top-0 right-0 w-1/2 h-full">
+          <img src={heroAmbassador} alt="" className="w-full h-full object-cover object-top" />
+          {/* Gradient fade from left */}
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
+        </div>
         <div className="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-2 gap-8 items-center relative z-10 py-16">
-          {/* Left — Copy with frosted backdrop */}
-          <div className="max-w-xl bg-background/80 backdrop-blur-sm rounded-2xl p-8">
+          {/* Left — Copy on solid background */}
+          <div className="max-w-xl">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 border border-foreground/20 rounded-full px-4 py-1.5 mb-8">
               <span className="font-body text-[10px] tracking-[0.2em] uppercase font-semibold border border-foreground/30 rounded px-1.5 py-0.5">3-IN-1</span>
