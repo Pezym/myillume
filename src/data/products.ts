@@ -115,6 +115,7 @@ export const bundlePricing: Record<string, BundleOption[]> = {
 };
 
 export const subscribePricing: Record<string, SubscribeOption> = {
+  '3-in-1-oral-kit': { subscribePrice: 72.75, oneTimePrice: 97, savePercent: 25 },
   'whitening-strips': { subscribePrice: 29.25, oneTimePrice: 39.00, savePercent: 25 },
   'whitening-wand': { subscribePrice: 27.84, oneTimePrice: 37.12, savePercent: 25 },
   'purple-toothpaste': { subscribePrice: 18.71, oneTimePrice: 24.95, savePercent: 25 },
