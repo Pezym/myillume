@@ -163,7 +163,36 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Category Cards */}
+      {/* Facts Backed by Science */}
+      <section className="py-24 bg-foreground text-background">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div>
+            <p className="font-body text-[10px] tracking-[0.3em] uppercase text-sand mb-4">Facts Backed by Science</p>
+            <h2 className="font-display text-3xl md:text-4xl mb-3 leading-tight">Modern Toothbrushes Leave your Dental Health Deficient</h2>
+            <p className="font-body text-base text-background/60 mb-10">illumé is the Only Toothbrush That Fills in the Gaps!</p>
+            <div className="space-y-8">
+              {[
+                { pct: '96%', text: 'of Americans will develop a cavity at some point in their life due to improper', bold: 'brushing habits.' },
+                { pct: '60%', text: 'more plaque is removed when you', bold: 'floss alongside brushing.' },
+                { pct: '55%', text: 'of Americans admit they', bold: 'don\'t floss daily.' },
+                { pct: '53%', text: 'of bad breath cases originate from bacteria on the', bold: 'tongue.' },
+              ].map((stat, i) => (
+                <div key={i} className="flex items-start gap-5">
+                  <div className="flex-shrink-0 w-16 h-16 rounded-full border-[3px] border-sand flex items-center justify-center">
+                    <span className="font-display text-lg text-sand">{stat.pct}</span>
+                  </div>
+                  <p className="font-body text-sm text-background/70 leading-relaxed pt-2">
+                    {stat.text} <span className="font-semibold text-background">{stat.bold}</span>
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="aspect-[3/4] rounded-3xl overflow-hidden">
+            <img src={toothpasteBottle} alt="illumé oral care" className="w-full h-full object-cover" />
+          </div>
+        </div>
+      </section>
       <section className="py-20 bg-sand-light/40">
         <div className="max-w-7xl mx-auto px-6">
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground text-center mb-3">Collections</p>
@@ -242,6 +271,58 @@ const Index = () => {
           <div className="mt-16">
             <VideoTestimonials />
           </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-24">
+        <div className="max-w-3xl mx-auto px-6">
+          <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground text-center mb-3">YOUR ILLUMÉ QUESTIONS, ANSWERED.</p>
+          <h2 className="font-display text-3xl md:text-4xl text-center mb-14">Wait… I was wondering that too.</h2>
+          <Accordion type="single" collapsible className="space-y-3">
+            <AccordionItem value="q1" className="border border-border rounded-2xl px-6">
+              <AccordionTrigger className="font-body text-sm">🦷 Will it help with bad breath?</AccordionTrigger>
+              <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
+                Absolutely. Bad breath is most commonly caused by bacteria buildup on the tongue. illumé's built-in tongue scraper removes that bacteria in seconds, leaving your mouth feeling (and smelling) fresh all day.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q2" className="border border-border rounded-2xl px-6">
+              <AccordionTrigger className="font-body text-sm">🦷 Is it good for sensitive gums?</AccordionTrigger>
+              <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
+                Yes! illumé features multiple brushing modes, including a gentle mode designed specifically for sensitive teeth and gums. The water flosser is also adjustable so you can control the pressure.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q3" className="border border-border rounded-2xl px-6">
+              <AccordionTrigger className="font-body text-sm">🦷 Is this really better than a regular electric toothbrush?</AccordionTrigger>
+              <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
+                A regular electric toothbrush only brushes. illumé brushes, flosses, AND scrapes your tongue — all in one device. It's a complete oral care system that replaces three separate tools.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q4" className="border border-border rounded-2xl px-6">
+              <AccordionTrigger className="font-body text-sm">🦷 I hate flossing… will I actually use this?</AccordionTrigger>
+              <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
+                That's exactly why we built it. The water flosser makes flossing effortless — just point and press. No string, no hassle. Most of our customers say they actually look forward to it now.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q5" className="border border-border rounded-2xl px-6">
+              <AccordionTrigger className="font-body text-sm">🦷 How often should I use the flosser and tongue scraper?</AccordionTrigger>
+              <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
+                We recommend using the water flosser at least once a day (ideally at night) and the tongue scraper every time you brush. It takes less than 30 seconds and makes a noticeable difference.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q6" className="border border-border rounded-2xl px-6">
+              <AccordionTrigger className="font-body text-sm">🦷 How long does the battery last?</AccordionTrigger>
+              <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
+                Up to 60 days on a single charge. illumé uses a wireless charging base, so just set it down and it's always ready to go.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="q7" className="border border-border rounded-2xl px-6">
+              <AccordionTrigger className="font-body text-sm">🦷 Is it bulky or hard to travel with?</AccordionTrigger>
+              <AccordionContent className="font-body text-sm text-muted-foreground leading-relaxed">
+                Not at all. illumé is sleek and compact — designed to fit easily in a toiletry bag. With its 60-day battery life, you won't even need to bring a charger on most trips.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
 
