@@ -1,19 +1,15 @@
 
 
-# Plan: Reposition Mobile Hero Image to Show Face & Toothbrush
-
-## Problem
-
-The mobile hero image is positioned with `object-top`, which frames the top of the model's head/hair. The face, smile, and toothbrush are cut off or pushed too low.
+# Plan: Shift Mobile Hero Image Down to Show Face
 
 ## Change
 
 ### File: `src/pages/Index.tsx` (line 29)
 
-Change the image's `object-position` from `object-top` to `object-[center_30%]` (or similar value like `object-center`) so the camera frames the model's face and the toothbrush instead of the hair. This shifts the visible crop area downward to capture the smile and product.
+Change `object-[center_30%]` to `object-[center_55%]` on the mobile hero `<img>`. This shifts the visible crop area significantly downward so the image starts around the model's eyes, showing the face, smile, and toothbrush instead of the hair.
 
-- Change: `object-top` → `object-[center_30%]` on the hero `<img>` element
-- May need to fine-tune the percentage (e.g., 25%-40%) to get the ideal framing showing both the smile and the toothbrush
+- `30%` = near top (current, too much hair)
+- `55%` = roughly halfway down the image, starting around the eyes
 
-No structural or layout changes needed — just a CSS object-position tweak.
+Single CSS change, no structural modifications.
 
