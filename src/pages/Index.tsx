@@ -215,7 +215,7 @@ const Index = () => {
       <section className="py-20 bg-sand-light/40">
         <div className="max-w-7xl mx-auto px-6">
           <p className="font-body text-[10px] tracking-[0.3em] uppercase text-muted-foreground text-center mb-3">Collections</p>
-          <h2 className="font-display text-3xl md:text-4xl text-center mb-14">Shop by Category</h2>
+          <h2 className="font-display text-3xl md:text-4xl text-center mb-14">Reinvent Your Routine</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { name: 'Kits', desc: 'Complete oral care systems', image: kitFullImg },
