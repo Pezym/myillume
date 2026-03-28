@@ -21,7 +21,8 @@ import toothpasteModel from '@/assets/toothpaste-model.jpg';
 import toothpasteTrio from '@/assets/toothpaste-trio.png';
 import brushHeads3Pack from '@/assets/brush-heads-3pack.jpg';
 import { products, bundlePricing, subscribePricing, productBullets, productFeatures, productFaqs } from '@/data/products';
-import { useCart } from '@/context/CartContext';
+import { useCartStore } from '@/stores/cartStore';
+import { buildCartProduct, buildBundleCartProduct, productShopifyMap } from '@/lib/cartHelpers';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import VideoTestimonials from '@/components/VideoTestimonials';
 import ReviewShowcase from '@/components/ReviewShowcase';
@@ -54,7 +55,8 @@ const useSaleCountdown = () => {
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const { addItem } = useCart();
+  const addItem = useCartStore(s => s.addItem);
+  const isCartLoading = useCartStore(s => s.isLoading);
   const product = products.find(p => p.id === id) || products[0];
   const countdown = useSaleCountdown();
 
@@ -94,19 +96,37 @@ const ProductDetail = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleAddToCart = () => {
-    addItem({
-      id: `${product.id}-${hasBundles ? `bundle-${selectedBundle}` : purchaseType}`,
-      name: product.name,
-      price: displayPrice,
-      originalPrice: displayOriginalPrice,
-      image: product.image,
-      variant: purchaseType === 'subscribe'
-        ? 'Subscribe & Save'
-        : hasBundles
-          ? `${selectedBundle}x`
-          : 'One-time purchase',
-    });
+  const handleAddToCart = async () => {
+    if (hasBundles && purchaseType === 'one-time' && currentBundle) {
+      // Adding a bundle — each bundle is a separate Shopify product
+      const { product: shopifyProduct, variantId } = buildBundleCartProduct(
+        currentBundle.qty,
+        currentBundle.label,
+        currentBundle.price,
+        product.image
+      );
+      await addItem({
+        product: shopifyProduct,
+        variantId,
+        variantTitle: currentBundle.label,
+        price: { amount: currentBundle.price.toFixed(2), currencyCode: 'USD' },
+        quantity: 1,
+        selectedOptions: [],
+      });
+    } else {
+      // Single product or subscribe
+      const mapping = productShopifyMap[product.id];
+      if (!mapping) return;
+      const shopifyProduct = buildCartProduct(product);
+      await addItem({
+        product: shopifyProduct,
+        variantId: mapping.shopifyVariantGid,
+        variantTitle: purchaseType === 'subscribe' ? 'Subscribe & Save' : 'Default Title',
+        price: { amount: displayPrice.toFixed(2), currencyCode: 'USD' },
+        quantity: 1,
+        selectedOptions: [],
+      });
+    }
   };
 
   return (
