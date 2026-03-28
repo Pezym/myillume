@@ -75,7 +75,7 @@ export const products: Product[] = [
     originalPrice: 29.99,
     rating: 4.9,
     reviewCount: 23,
-    image: '/placeholder.svg',
+    image: brushHeads3PackImg,
     description: 'DuPont bristle replacement heads for your illumé toothbrush.',
     badge: 'SAVE 33%',
   },

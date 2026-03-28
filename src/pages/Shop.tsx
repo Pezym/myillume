@@ -4,6 +4,7 @@ import { Star, ShoppingBag, ArrowRight } from 'lucide-react';
 import { products, bundlePricing } from '@/data/products';
 import { useCart } from '@/context/CartContext';
 import toothbrushImg from '@/assets/toothbrush.png';
+import kitFullImg from '@/assets/kit-full.jpg';
 
 const categories = ['All', 'Kits', 'Oral Care', 'Accessories'];
 
@@ -31,7 +32,9 @@ const Shop = () => {
               Shop All Products <ArrowRight size={14} />
             </a>
           </div>
-          <div className="md:col-span-3 aspect-[3/2] bg-sand/20 rounded-2xl" />
+          <div className="md:col-span-3 aspect-[3/2] rounded-2xl overflow-hidden">
+            <img src={kitFullImg} alt="illumé 3-in-1 Oral Kit" className="w-full h-full object-cover" />
+          </div>
         </div>
       </section>
 
