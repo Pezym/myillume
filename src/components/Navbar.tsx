@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { Search, ShoppingBag, Menu, X } from 'lucide-react';
-import { useCart } from '@/context/CartContext';
+import { useCartStore } from '@/stores/cartStore';
 import { useState } from 'react';
 
 const Navbar = () => {
-  const { itemCount, toggleCart } = useCart();
+  const items = useCartStore(s => s.items);
+  const toggleCart = useCartStore(s => s.toggleCart);
+  const itemCount = items.reduce((sum, i) => sum + i.quantity, 0);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const links = [
@@ -16,12 +18,10 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
-        {/* Logo */}
         <Link to="/" onClick={() => window.scrollTo(0, 0)} className="font-display italic text-2xl tracking-tight text-foreground">
           illumé<span className="text-sand ml-0.5">.</span>
         </Link>
 
-        {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           {links.map(link =>
             link.external ? (
@@ -36,7 +36,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Right side */}
         <div className="flex items-center gap-4">
           <button className="hidden md:block text-foreground hover:text-sand transition-colors" aria-label="Search">
             <Search size={18} />
@@ -69,7 +68,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-background border-b border-border px-6 pb-6 space-y-4">
           {links.map(link =>
