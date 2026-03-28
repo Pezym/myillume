@@ -12,7 +12,7 @@ const Navbar = () => {
     { label: 'Shop', to: '/shop' },
     { label: 'Science', to: '#' },
     { label: 'The Routine', to: '#' },
-    { label: 'Affiliate', to: '#' },
+    { label: 'Affiliate', to: 'https://affilitrak.com/register?shop=www.myillume.com', external: true },
   ];
 
   return (
@@ -25,15 +25,17 @@ const Navbar = () => {
 
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
-          {links.map(link => (
-            <Link
-              key={link.label}
-              to={link.to}
-              className="font-body text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map(link =>
+            link.external ? (
+              <a key={link.label} href={link.to} target="_blank" rel="noopener noreferrer" className="font-body text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors">
+                {link.label}
+              </a>
+            ) : (
+              <Link key={link.label} to={link.to} className="font-body text-sm tracking-wide text-muted-foreground hover:text-foreground transition-colors">
+                {link.label}
+              </Link>
+            )
+          )}
         </div>
 
         {/* Right side */}
@@ -72,16 +74,17 @@ const Navbar = () => {
       {/* Mobile menu */}
       {mobileOpen && (
         <div className="md:hidden bg-background border-b border-border px-6 pb-6 space-y-4">
-          {links.map(link => (
-            <Link
-              key={link.label}
-              to={link.to}
-              onClick={() => setMobileOpen(false)}
-              className="block font-body text-sm tracking-wide text-foreground py-2"
-            >
-              {link.label}
-            </Link>
-          ))}
+          {links.map(link =>
+            link.external ? (
+              <a key={link.label} href={link.to} target="_blank" rel="noopener noreferrer" onClick={() => setMobileOpen(false)} className="block font-body text-sm tracking-wide text-foreground py-2">
+                {link.label}
+              </a>
+            ) : (
+              <Link key={link.label} to={link.to} onClick={() => setMobileOpen(false)} className="block font-body text-sm tracking-wide text-foreground py-2">
+                {link.label}
+              </Link>
+            )
+          )}
           <Link
             to="/shop"
             onClick={() => setMobileOpen(false)}
