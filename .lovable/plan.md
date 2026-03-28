@@ -1,18 +1,16 @@
 
 
-# Plan: Show Full Toothbrush in Featured Card on Mobile
-
-## Problem
-The featured product image container on mobile uses `aspect-[4/3]` (landscape), which crops the tall toothbrush image.
+# Plan: Show Video Testimonials Only on 3-in-1 Kit Page
 
 ## Change
 
-### File: `src/pages/Shop.tsx` (line 53)
-Change the mobile aspect ratio from `aspect-[4/3]` to `aspect-square` so the container is tall enough to display the entire toothbrush.
+### File: `src/pages/ProductDetail.tsx` (line 371-372)
 
-```
-aspect-[4/3] md:aspect-auto  →  aspect-square md:aspect-auto
+Wrap the `<VideoTestimonials />` in a conditional so it only renders for the kit product:
+
+```tsx
+{product.id === '3-in-1-oral-kit' && <VideoTestimonials />}
 ```
 
-Single CSS change, no structural modifications.
+No other files affected — the homepage and shop page testimonials stay as-is.
 
