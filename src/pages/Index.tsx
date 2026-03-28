@@ -237,6 +237,9 @@ const Index = () => {
               </div>
             ))}
           </div>
+          <div className="mt-16">
+            <VideoTestimonials />
+          </div>
         </div>
       </section>
 
