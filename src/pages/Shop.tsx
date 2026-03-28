@@ -163,7 +163,7 @@ const Shop = () => {
           <h2 className="font-display text-3xl md:text-4xl text-center mb-3">Share the Health & Spread the Wealth</h2>
           <p className="font-body text-sm text-primary-foreground/60 text-center mb-10">Save more when you bundle. Free shipping on every order.</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {bundlePricing.map(bundle => (
+            {bundlePricing['3-in-1-oral-kit'].map(bundle => (
               <div
                 key={bundle.qty}
                 className={`relative border rounded-2xl p-6 transition-all hover:-translate-y-1 ${
