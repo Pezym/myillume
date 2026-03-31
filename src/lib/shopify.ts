@@ -220,7 +220,11 @@ export async function fetchShopifyProductByHandle(handle: string): Promise<Shopi
 // Cart mutations
 const CART_QUERY = `
   query cart($id: ID!) {
-    cart(id: $id) { id totalQuantity }
+    cart(id: $id) {
+      id
+      totalQuantity
+      checkoutUrl
+    }
   }
 `;
 
@@ -267,7 +271,7 @@ const CART_LINES_REMOVE_MUTATION = `
   }
 `;
 
-function formatCheckoutUrl(checkoutUrl: string): string {
+export function formatCheckoutUrl(checkoutUrl: string): string {
   try {
     const url = new URL(checkoutUrl);
     // Always use the .myshopify.com domain for checkout to avoid
