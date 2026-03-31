@@ -24,7 +24,11 @@ const CartDrawer = () => {
   const handleCheckout = () => {
     const checkoutUrl = getCheckoutUrl();
     if (checkoutUrl) {
-      window.open(checkoutUrl, '_blank');
+      const newWindow = window.open(checkoutUrl, '_blank');
+      if (!newWindow || newWindow.closed) {
+        // Fallback if popup is blocked
+        window.location.href = checkoutUrl;
+      }
       closeCart();
     }
   };
