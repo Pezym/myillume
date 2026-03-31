@@ -8,6 +8,7 @@ import {
   updateShopifyCartLine,
   removeLineFromShopifyCart,
   fetchCart,
+  formatCheckoutUrl,
 } from '@/lib/shopify';
 
 interface CartStore {
@@ -138,7 +139,10 @@ export const useCartStore = create<CartStore>()(
       },
 
       clearCart: () => set({ items: [], cartId: null, checkoutUrl: null }),
-      getCheckoutUrl: () => get().checkoutUrl,
+      getCheckoutUrl: () => {
+        const checkoutUrl = get().checkoutUrl;
+        return checkoutUrl ? formatCheckoutUrl(checkoutUrl) : null;
+      },
 
       syncCart: async () => {
         const { cartId, isSyncing, clearCart } = get();
@@ -148,7 +152,14 @@ export const useCartStore = create<CartStore>()(
           const data = await fetchCart(cartId);
           if (!data) return;
           const cart = data?.data?.cart;
-          if (!cart || cart.totalQuantity === 0) clearCart();
+          if (!cart || cart.totalQuantity === 0) {
+            clearCart();
+            return;
+          }
+
+          if (cart.checkoutUrl) {
+            set({ checkoutUrl: formatCheckoutUrl(cart.checkoutUrl) });
+          }
         } catch (error) {
           console.error('Failed to sync cart:', error);
         } finally {
